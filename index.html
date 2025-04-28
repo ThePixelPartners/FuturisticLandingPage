@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallel - Beyond the Digital Horizon</title>
+    <meta name="description" content="A futuristic landing page showcasing holographic elements, glowing UI, and mysterious storytelling narrative. Bridging dimensions through digital space.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/yourusername/your-repo/main/client/public/favicon.png">
+    
+    <!-- Custom inline styles to maintain the look of the page -->
+    <style>
+        :root {
+            --cyan-400: #22d3ee;
+            --cyan-500: #06b6d4;
+            --purple-500: #a855f7;
+            --purple-600: #9333ea;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(to bottom right, #0d101e, #141b33, #0a0d19);
+            color: #f0f8ff;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .grid-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            background-image: linear-gradient(rgba(0, 183, 255, 0.3) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(0, 183, 255, 0.3) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: rotateX(60deg) scale(2) translateZ(-100px);
+            perspective: 500px;
+            z-index: -1;
+        }
+
+        .glow-effect {
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            width: 50%;
+            height: 50%;
+            border-radius: 50%;
+            background-color: #6e00ff;
+            opacity: 0.1;
+            filter: blur(150px);
+            transform: translate(-50%, -50%);
+            animation: pulse 8s ease-in-out infinite alternate;
+        }
+        
+        .glow-effect:last-child {
+            bottom: 25%;
+            right: 25%;
+            left: auto;
+            top: auto;
+            background-color: #00b7ff;
+            transform: translate(50%, 50%);
+            animation-delay: 4s;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.05; }
+            100% { opacity: 0.15; }
+        }
+        
+        .logo {
+            margin-bottom: 2rem;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(to right, var(--cyan-400), var(--purple-500));
+            border-radius: 9999px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-family: monospace;
+            font-size: 0.875rem;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--cyan-400), var(--purple-500), var(--cyan-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            text-align: center;
+            color: #a6c8ff;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, var(--cyan-500), var(--purple-600));
+            color: white;
+            font-family: monospace;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            font-weight: bold;
+        }
+        
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 183, 255, 0.4);
+        }
+        
+        .cta-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--purple-600), var(--cyan-500));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .cta-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .cta-btn span {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: white;
+            margin-right: 8px;
+            animation: pulse-animation 2s infinite;
+        }
+        
+        @keyframes pulse-animation {
+            0% { opacity: 0.6; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0.6; transform: scale(0.9); }
+        }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            width: 100%;
+            max-width: 600px;
+            background-color: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 183, 255, 0.2);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metrics::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--cyan-500), var(--purple-500), var(--cyan-500));
+            opacity: 0.7;
+        }
+        
+        .metric {
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--cyan-400);
+            font-family: monospace;
+        }
+        
+        .metric-value:nth-child(2) {
+            color: var(--purple-400);
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            color: #a6c8ff;
+            text-transform: uppercase;
+            font-family: monospace;
+        }
+        
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.875rem;
+            color: rgba(166, 200, 255, 0.7);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+                justify-content: flex-start;
+            }
+        }
+
+        .portal-button {
+            margin-top: 1rem;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid rgba(0, 183, 255, 0.3);
+            color: var(--cyan-400);
+            font-family: monospace;
+            font-weight: bold;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            position: relative;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .portal-button:hover {
+            border-color: rgba(0, 183, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 183, 255, 0.2);
+        }
+        
+        .portal-button::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--cyan-400), var(--purple-500));
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+        
+        .portal-button:hover::after {
+            width: 80%;
+        }
+        
+        .indicator {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            background-color: var(--cyan-400);
+            border-radius: 50%;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="grid-pattern"></div>
+    <div class="glow-effect"></div>
+    <div class="glow-effect"></div>
+    
+    <div class="container">
+        <div class="logo">TRANSMISSION_INCOMING</div>
+        
+        <h1>Beyond the Digital <span>Horizon</span></h1>
+        
+        <p>
+            They said it couldn't be done—bridging dimensions through digital space. But in 2037, we discovered the frequency. 
+            <span style="font-style: italic; color: var(--cyan-400);">Parallel</span> is not just technology. It's the gateway to what awaits beyond the veil of conventional reality.
+        </p>
+        
+        <div class="metrics">
+            <!-- Scanning animation -->
+            <div style="position: absolute; inset: 0; background: linear-gradient(to right, transparent, rgba(0, 183, 255, 0.2), transparent); transform: translateX(-100%); animation: scan 3s linear infinite;"></div>
+            
+            <!-- Data readings -->
+            <div class="metric">
+                <div class="metric-value">97.3%</div>
+                <div class="metric-label">REALITY SYNC</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value" style="color: var(--purple-500);">13.8B</div>
+                <div class="metric-label">QUANTUM CYCLES</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">∞</div>
+                <div class="metric-label">POSSIBILITIES</div>
+            </div>
+        </div>
+        
+        <a href="https://github.com/yourusername/your-repo" class="cta-btn">
+            <span>
+                <div class="pulse-dot"></div>
+                INITIALIZE SEQUENCE
+            </span>
+        </a>
+        
+        <a href="https://github.com/yourusername/your-repo" class="portal-button">
+            ACCESS ARCHIVES
+            <div class="indicator"></div>
+        </a>
+        
+        <footer>
+            &copy; 2037 Parallel Systems • Dimensional Gateway ID:2037-ALPHA
+        </footer>
+    </div>
+    
+    <script>
+        // Add animation for scan effect
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                @keyframes scan {
+                    0% { transform: translateX(-100%); }
+                    100% { transform: translateX(100%); }
+                }
+            </style>
+        `);
+        
+        // If you have a deployed version of your app, uncomment below to redirect
+        /*
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if we should redirect to the actual application
+            const redirectToApp = () => {
+                window.location.href = 'https://yourusername.github.io/your-repo/app/';
+            };
+            
+            // Optional: Add a delay before redirecting
+            // setTimeout(redirectToApp, 3000);
+            
+            // Or use the button to navigate
+            document.querySelector('.cta-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                redirectToApp();
+            });
+        });
+        */
+    </script>
+</body>
+</html>
