@@ -111,6 +111,33 @@ export default {
           from: { transform: "scale(0.95)", opacity: "0" },
           to: { transform: "scale(1)", opacity: "1" },
         },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "reverse-spin": {
+          "0%": { transform: "rotate(360deg)" },
+          "100%": { transform: "rotate(0deg)" },
+        },
+        "rotate-y-12": {
+          "0%": { transform: "rotateY(0deg)" },
+          "100%": { transform: "rotateY(12deg)" },
+        },
+        blink: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0" },
+        },
+        scan: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+        ping: {
+          "75%, 100%": { transform: "scale(2)", opacity: "0" },
+        },
+        "data-streaming": {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-100%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -123,6 +150,13 @@ export default {
         "shimmer": "shimmer 3s linear infinite",
         "fade-in": "fadeIn 0.5s ease-out",
         "scale-in": "scaleIn 0.5s ease-out",
+        "spin-slow": "spin-slow 12s linear infinite",
+        "reverse-spin": "reverse-spin 15s linear infinite",
+        "rotate-y-12": "rotate-y-12 1.5s ease-in-out",
+        "blink": "blink 1s ease-in-out infinite",
+        "scan": "scan 3s ease-in-out infinite",
+        "ping": "ping 2s cubic-bezier(0, 0, 0.2, 1) infinite",
+        "data-streaming": "data-streaming 15s linear infinite",
       },
     },
   },

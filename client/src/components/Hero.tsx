@@ -138,64 +138,90 @@ export default function Hero() {
         <div className="flex flex-col md:flex-row items-center">
           {/* Left Content */}
           <div className="w-full md:w-1/2 text-center md:text-left md:pr-12 mb-12 md:mb-0">
-            <div className="mb-6 inline-block">
-              <span className="px-4 py-1 text-sm bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full text-white uppercase tracking-wide font-medium">
-                Next-Gen Technology
+            <div className="mb-6 inline-block" data-aos="fade-up">
+              <span className="px-4 py-1 text-sm bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full text-white uppercase tracking-wide font-mono">
+                TRANSMISSION_INCOMING
               </span>
             </div>
             <h1 
               ref={headlineRef} 
               className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-600 title-large mb-6"
+              data-aos="fade-up"
+              data-aos-delay="100"
             >
-              The Future of Digital
+              Beyond the Digital
               <span className="relative ml-3 inline-block">
-                Solutions
+                Horizon
                 <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-purple-500"></span>
               </span>
             </h1>
             <p 
               ref={paragraphRef}
               className="text-blue-100 text-lg mb-8 max-w-lg mx-auto md:mx-0"
+              data-aos="fade-up"
+              data-aos-delay="200"
             >
-              Transform your organization with our cutting-edge platform, leveraging AI-powered insights and quantum-secure architecture for unprecedented growth and efficiency.
+              They said it couldn't be done—bridging dimensions through digital space. But in 2037, we discovered the frequency. 
+              <span className="italic text-cyan-300"> Parallel</span> is not just technology. It's the gateway to what awaits beyond the veil of conventional reality.
             </p>
             
             {/* Metrics */}
-            <div className="grid grid-cols-3 gap-2 mb-8 border border-cyan-900/30 rounded-lg p-4 backdrop-blur-sm bg-cyan-900/10">
+            <div className="grid grid-cols-3 gap-2 mb-8 border border-cyan-900/30 rounded-lg p-4 backdrop-blur-sm bg-black/20 relative overflow-hidden"
+                 data-aos="fade-up"
+                 data-aos-delay="300">
+              {/* Scanning effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent -translate-x-full animate-scan"></div>
+              
+              {/* Data readings */}
               <div className="text-center">
-                <div className="text-cyan-400 text-2xl font-bold">99.9%</div>
-                <div className="text-blue-200 text-xs">Uptime</div>
+                <div className="text-cyan-400 text-2xl font-bold font-mono">97.3%</div>
+                <div className="text-blue-200 text-xs font-mono">REALITY SYNC</div>
               </div>
               <div className="text-center">
-                <div className="text-purple-400 text-2xl font-bold">2,500+</div>
-                <div className="text-blue-200 text-xs">Clients</div>
+                <div className="text-purple-400 text-2xl font-bold font-mono">13.8B</div>
+                <div className="text-blue-200 text-xs font-mono">QUANTUM CYCLES</div>
               </div>
               <div className="text-center">
-                <div className="text-cyan-400 text-2xl font-bold">3.2TB</div>
-                <div className="text-blue-200 text-xs">Data Processed</div>
+                <div className="text-cyan-400 text-2xl font-bold font-mono">∞</div>
+                <div className="text-blue-200 text-xs font-mono">POSSIBILITIES</div>
               </div>
+              
+              {/* Status indicator */}
+              <div className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-cyan-500 opacity-70"></div>
             </div>
             
             {/* CTA Buttons */}
             <div 
               ref={ctaContainerRef}
               className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start"
+              data-aos="fade-up"
+              data-aos-delay="400"
             >
               <a 
                 href="#features" 
-                className="relative overflow-hidden group px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/50 hover:scale-105"
+                className="relative overflow-hidden group px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg text-white font-mono transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/50 hover:scale-105"
               >
-                <span className="relative z-10">Get Started</span>
+                <span className="relative z-10 flex items-center">
+                  <span className="w-2 h-2 rounded-full bg-white animate-pulse mr-2"></span>
+                  INITIALIZE SEQUENCE
+                </span>
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 <span className="absolute bottom-0 left-0 w-full h-1 bg-white opacity-20"></span>
                 <span className="absolute top-0 right-0 w-8 h-8 -mt-2 -mr-2 rounded-full bg-cyan-300 blur-xl opacity-70 animate-pulse-slow"></span>
+                
+                {/* Cyber corners */}
+                <span className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/50"></span>
+                <span className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/50"></span>
+                <span className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/50"></span>
+                <span className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/50"></span>
               </a>
               <a 
-                href="#" 
+                href="#about" 
                 className="relative group px-8 py-4 border border-cyan-400/30 hover:border-cyan-400/80 rounded-lg text-white backdrop-blur-sm bg-cyan-900/10 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-900/20"
               >
-                <span className="text-gradient-cyan">Learn More</span>
+                <span className="text-gradient-cyan font-mono">ACCESS ARCHIVES</span>
                 <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute top-0 right-0 w-2 h-2 bg-cyan-400 opacity-70 group-hover:opacity-100 transition-opacity"></span>
               </a>
             </div>
           </div>
@@ -236,12 +262,25 @@ export default function Hero() {
                   </div>
                 </div>
                 
-                {/* Holographic Image */}
+                {/* Holographic Portal */}
                 <div className="relative p-4 overflow-hidden">
                   <div className="relative transform perspective-1000 hover:rotate-y-12 transition-all duration-700">
+                    {/* Portal loading effects */}
+                    <div className="absolute inset-0 bg-black rounded-lg z-0 flex items-center justify-center overflow-hidden">
+                      <div className="absolute w-full h-full">
+                        <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
+                        <div className="absolute inset-0 bg-gradient-radial from-cyan-500/30 via-transparent to-transparent animate-pulse-slow"></div>
+                      </div>
+                      
+                      {/* Portal spin effect */}
+                      <div className="absolute w-4/5 h-4/5 border-2 border-cyan-400/30 rounded-full animate-spin-slow"></div>
+                      <div className="absolute w-3/5 h-3/5 border border-purple-500/40 rounded-full animate-reverse-spin"></div>
+                      <div className="absolute w-2/5 h-2/5 border-2 border-cyan-400/50 rounded-full animate-spin-slow"></div>
+                    </div>
+                    
                     <img 
                       src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
-                      alt="Futuristic digital interface" 
+                      alt="Portal to digital dimension" 
                       className="w-full h-auto rounded-lg z-10 relative"
                     />
                     
@@ -249,19 +288,48 @@ export default function Hero() {
                     <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/30 to-purple-500/30 mix-blend-overlay rounded-lg"></div>
                     
                     {/* Scan Lines */}
-                    <div className="absolute inset-0 bg-scan-lines rounded-lg opacity-10"></div>
+                    <div className="absolute inset-0 bg-scan-lines rounded-lg opacity-20"></div>
                     
-                    {/* Pulsing Dots */}
-                    <div className="absolute top-5 right-5 w-3 h-3 rounded-full bg-cyan-400 animate-pulse shadow-lg shadow-cyan-400"></div>
-                    <div className="absolute bottom-5 left-5 w-3 h-3 rounded-full bg-purple-500 animate-pulse shadow-lg shadow-purple-500" style={{ animationDelay: '1s' }}></div>
+                    {/* Mysterious Elements */}
+                    <div className="absolute top-0 left-0 right-0 p-2 bg-black/50 backdrop-blur-sm flex items-center justify-between">
+                      <div className="text-xs font-mono text-cyan-400 flex items-center">
+                        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse mr-2"></span>
+                        GATEWAY_ACTIVE
+                      </div>
+                      <div className="text-xs font-mono text-purple-400">ID:2037-ALPHA</div>
+                    </div>
+                    
+                    {/* Portal coordinates */}
+                    <div className="absolute bottom-0 left-0 right-0 p-2 bg-black/50 backdrop-blur-sm text-xs font-mono text-cyan-400">
+                      <div className="flex justify-between">
+                        <span>DIM_COORD: 34.15.92.78</span>
+                        <span className="text-purple-400 animate-pulse">PULSE: STABLE</span>
+                      </div>
+                    </div>
+                    
+                    {/* Mysterious symbols */}
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white/20 text-5xl font-serif rotate-45 animate-pulse-slow">
+                      ⌬
+                    </div>
+                    
+                    {/* Pulsing interaction points */}
+                    <div className="absolute top-1/4 right-1/4 w-3 h-3 rounded-full bg-cyan-400 animate-ping opacity-60"></div>
+                    <div className="absolute bottom-1/3 left-1/3 w-2 h-2 rounded-full bg-purple-500 animate-ping opacity-60" style={{ animationDelay: '1s' }}></div>
+                    <div className="absolute top-2/3 right-1/3 w-2 h-2 rounded-full bg-cyan-400 animate-ping opacity-60" style={{ animationDelay: '2s' }}></div>
                   </div>
                 </div>
                 
-                {/* Tech Metrics */}
-                <div className="flex justify-between px-4 pb-4 text-xs text-cyan-300 font-mono">
-                  <div>QUANTUM SECURE</div>
-                  <div className="animate-pulse">SYSTEM ONLINE</div>
-                  <div>AI-POWERED</div>
+                {/* Terminal Output */}
+                <div className="px-4 pb-4 font-mono text-xs">
+                  <div className="flex items-center space-x-2 mb-1">
+                    <span className="text-cyan-400">[SYS]</span>
+                    <span className="text-blue-200 typing-effect">Dimensional gateway initialized. Awaiting authorization...</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-purple-400">[USR]</span>
+                    <span className="text-blue-200">Access permitted. Welcome, traveler.</span>
+                    <span className="w-2 h-4 bg-cyan-400 animate-blink"></span>
+                  </div>
                 </div>
               </div>
             </div>
