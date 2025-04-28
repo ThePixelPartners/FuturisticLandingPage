@@ -21,8 +21,8 @@ export default function Hero() {
         const y = (clientY / height - 0.5) * 2; // -1 to 1
         setMousePosition({ x, y });
         
-        // Hide "Find Us" text when mouse moves
-        setShowFindUs(false);
+        // We'll handle the showFindUs state through mouseEnter/mouseLeave events instead
+        // This was causing immediate hiding of the text
       }
     };
 
@@ -141,24 +141,41 @@ export default function Hero() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col md:flex-row items-center">
           {/* Left Content */}
-          <div 
-            className="w-full md:w-1/2 text-center md:text-left md:pr-12 mb-12 md:mb-0 relative"
-            onMouseEnter={() => setShowFindUs(true)}
-          >
-            {/* "Find Us" Text that appears on hover */}
-            {showFindUs && (
-              <div className="absolute top-0 left-0 z-20 fade-in w-full h-full flex items-center justify-center pointer-events-none">
-                <div className="bg-black/50 backdrop-blur-lg p-6 rounded-lg border border-cyan-400/50 text-center transform transition-all duration-300 shadow-lg shadow-cyan-500/30">
-                  <span className="mystery-text text-2xl font-mono font-bold glitch-text">FIND US</span>
-                  <div className="mt-2 text-cyan-300 text-xs font-mono opacity-80">COORDINATES CLASSIFIED</div>
-                  {/* Ripple effect */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    <div className="portal-ripple"></div>
-                    <div className="portal-ripple" style={{ animationDelay: '1s' }}></div>
-                  </div>
-                </div>
+          <div className="w-full md:w-1/2 text-center md:text-left md:pr-12 mb-12 md:mb-0 relative">
+            {/* Find Us hover area - specific hoverable element that triggers the popup */}
+            <div 
+              className="absolute top-8 right-8 w-24 h-24 z-40 cursor-pointer group"
+              onMouseEnter={() => setShowFindUs(true)}
+              onMouseLeave={() => setShowFindUs(false)}
+            >
+              {/* Hover indicator */}
+              <div className="absolute inset-0 rounded-full border border-cyan-400/40 flex items-center justify-center opacity-60 group-hover:opacity-100 transition-all duration-300">
+                <div className="absolute inset-2 rounded-full border border-purple-500/30 animate-spin-slow"></div>
+                <div className="absolute inset-4 rounded-full border border-cyan-400/20 animate-reverse-spin"></div>
+                <div className="text-cyan-400 text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300">FIND US</div>
               </div>
-            )}
+              
+              {/* Pulsing dots */}
+              <div className="absolute top-1 right-2 w-3 h-3 rounded-full bg-cyan-400 animate-pulse opacity-70"></div>
+              <div className="absolute top-1/2 right-1/2 w-4 h-4 rounded-full bg-purple-500/50 animate-pulse-slow opacity-0 group-hover:opacity-50 transition-opacity" style={{ animationDelay: "0.5s" }}></div>
+              <div className="absolute bottom-2 right-3 w-2 h-2 rounded-full bg-cyan-300 animate-pulse opacity-40" style={{ animationDelay: "1s" }}></div>
+            </div>
+            
+            {/* "Find Us" Text that appears on hover */}
+            <div className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none transition-all duration-300 transform ${showFindUs ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+              <div className="bg-black/70 backdrop-blur-xl p-8 rounded-lg border border-cyan-400/70 text-center transform transition-all duration-300 shadow-xl shadow-cyan-500/40">
+                <span className="mystery-text text-3xl font-mono font-bold glitch-text animate-pulse-slow">FIND US</span>
+                <div className="mt-2 text-cyan-300 text-sm font-mono opacity-80">COORDINATES CLASSIFIED</div>
+                {/* Ripple effect */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-lg">
+                  <div className="portal-ripple"></div>
+                  <div className="portal-ripple" style={{ animationDelay: '1s' }}></div>
+                  <div className="portal-ripple" style={{ animationDelay: '2s' }}></div>
+                </div>
+                {/* Scan line effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent -translate-x-full animate-scan"></div>
+              </div>
+            </div>
             <div className="mb-6 inline-block" data-aos="fade-up">
               <span className="px-4 py-1 text-sm bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full text-white uppercase tracking-wide font-mono">
                 TRANSMISSION_INCOMING
