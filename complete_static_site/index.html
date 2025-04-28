@@ -1843,6 +1843,228 @@
                 gap: 1rem;
                 text-align: center;
             }
+            
+            /* Additional responsive styles for new sections */
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .experience-showcase,
+            .tab-panel.active,
+            .started-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        
+        /* Experience Section Styles */
+        .experience-section {
+            padding: 8rem 0;
+            background-color: var(--dark-bg);
+        }
+        
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .experience-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(132, 204, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 183, 255, 0.15);
+        }
+        
+        .experience-icon {
+            font-size: 2rem;
+            color: var(--cyan-400);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .experience-icon-glow {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, rgba(0, 183, 255, 0.4) 0%, rgba(0, 183, 255, 0) 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: pulse 3s infinite;
+        }
+        
+        .experience-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+        
+        .experience-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        .experience-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 5rem;
+            align-items: center;
+        }
+        
+        .showcase-visual {
+            position: relative;
+        }
+        
+        .showcase-frame {
+            position: relative;
+            padding-top: 56.25%;
+            background: linear-gradient(135deg, var(--dark-bg-alt), var(--dark-bg));
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(132, 204, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Industry Solutions Section */
+        .industry-section {
+            padding: 8rem 0;
+            background-color: var(--dark-bg-alt);
+        }
+        
+        .industry-tabs {
+            margin-top: 3rem;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab-btn:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--cyan-400), var(--purple-500));
+            transition: width 0.3s ease;
+        }
+        
+        .tab-btn:hover {
+            color: var(--white);
+        }
+        
+        .tab-btn:hover:before {
+            width: 80%;
+        }
+        
+        .tab-btn.active {
+            color: var(--white);
+            background: rgba(0, 183, 255, 0.1);
+        }
+        
+        .tab-btn.active:before {
+            width: 80%;
+        }
+        
+        .tab-panel {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .tab-panel.active {
+            display: grid;
+        }
+        
+        /* Get Started Section */
+        .get-started-section {
+            padding: 8rem 0;
+            background-color: var(--dark-bg);
+        }
+        
+        .started-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .started-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .step {
+            display: flex;
+            gap: 1.5rem;
+            position: relative;
+        }
+        
+        .step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            left: 1.25rem;
+            top: 3rem;
+            height: calc(100% - 1rem);
+            width: 1px;
+            background: linear-gradient(to bottom, var(--cyan-400), rgba(0, 183, 255, 0));
+        }
+        
+        .step-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cyan-400);
+            font-family: var(--font-mono);
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--cyan-400);
+            border-radius: 50%;
+            background: rgba(0, 183, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 183, 255, 0.3);
         }
     </style>
 </head>
@@ -3000,6 +3222,31 @@
             // Initialize the floating dots and section transitions
             createFloatingDots();
             setupSectionAnimations();
+            
+            // Industry tabs functionality
+            const setupTabs = () => {
+                const tabBtns = document.querySelectorAll('.tab-btn');
+                
+                tabBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        // Remove active class from all buttons and panels
+                        tabBtns.forEach(b => b.classList.remove('active'));
+                        document.querySelectorAll('.tab-panel').forEach(panel => {
+                            panel.classList.remove('active');
+                        });
+                        
+                        // Add active class to clicked button
+                        btn.classList.add('active');
+                        
+                        // Show corresponding panel
+                        const tabId = btn.getAttribute('data-tab');
+                        document.getElementById(`${tabId}-panel`).classList.add('active');
+                    });
+                });
+            };
+            
+            // Run tab setup
+            setupTabs();
         });
     </script>
 </body>
