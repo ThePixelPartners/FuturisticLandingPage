@@ -3,6 +3,7 @@ import gsap from 'gsap';
 
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [showFindUs, setShowFindUs] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
@@ -19,6 +20,9 @@ export default function Hero() {
         const x = (clientX / width - 0.5) * 2; // -1 to 1
         const y = (clientY / height - 0.5) * 2; // -1 to 1
         setMousePosition({ x, y });
+        
+        // Hide "Find Us" text when mouse moves
+        setShowFindUs(false);
       }
     };
 
@@ -137,7 +141,24 @@ export default function Hero() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col md:flex-row items-center">
           {/* Left Content */}
-          <div className="w-full md:w-1/2 text-center md:text-left md:pr-12 mb-12 md:mb-0">
+          <div 
+            className="w-full md:w-1/2 text-center md:text-left md:pr-12 mb-12 md:mb-0 relative"
+            onMouseEnter={() => setShowFindUs(true)}
+          >
+            {/* "Find Us" Text that appears on hover */}
+            {showFindUs && (
+              <div className="absolute top-0 left-0 z-20 fade-in w-full h-full flex items-center justify-center pointer-events-none">
+                <div className="bg-black/50 backdrop-blur-lg p-6 rounded-lg border border-cyan-400/50 text-center transform transition-all duration-300 shadow-lg shadow-cyan-500/30">
+                  <span className="mystery-text text-2xl font-mono font-bold glitch-text">FIND US</span>
+                  <div className="mt-2 text-cyan-300 text-xs font-mono opacity-80">COORDINATES CLASSIFIED</div>
+                  {/* Ripple effect */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="portal-ripple"></div>
+                    <div className="portal-ripple" style={{ animationDelay: '1s' }}></div>
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="mb-6 inline-block" data-aos="fade-up">
               <span className="px-4 py-1 text-sm bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full text-white uppercase tracking-wide font-mono">
                 TRANSMISSION_INCOMING
