@@ -1,0 +1,59 @@
+You are a senior front-end web developer and UI designer. Build a **highly dynamic landing page** inspired by the Canva "Parallel" template (https://12989252e22342.my.canva.site/parallel-website). Follow these requirements exactly:
+
+1. **General Visual Style**
+   - Background: Fullscreen **looping background video** (use a free stock MP4 placeholder) with a semi-transparent dark overlay.
+   - Typography: Use clean, modern sans-serif fonts (like 'Poppins' or 'Montserrat').
+   - Global effects: Subtle floating animation on 3D objects (keyframe @keyframes), hover scaling, and parallax image effects.
+
+2. **Animations and Motion**
+   - Section elements (text, images, buttons) should **fade in, slide in, or zoom in** on scroll (use Intersection Observer API or a simple animation library like AOS.js or Animate.css).
+   - Create a **hover "float" effect** for key images or cards (e.g., slight Y-axis lift + shadow growth).
+   - Smooth scrolling for internal navigation.
+
+3. **Hero Section**
+   - Full-screen hero with **background video** behind a centered headline, short paragraph, and call-to-action button.
+   - Button hover effect: gentle pulse or glow animation.
+
+4. **Features Section**
+   - Three feature cards with icons (placeholder SVGs) that **tilt slightly on hover** (use CSS transform rotateX/rotateY).
+   - Cards should use a **glassmorphism** effect: background-blur with semi-transparent white background.
+
+5. **Parallax Scroll Section**
+   - Alternating sections where background images have **slow parallax motion** as user scrolls.
+   - Foreground text blocks remain fixed longer while background subtly moves.
+
+6. **Video Highlight Section**
+   - Insert an **autoplay muted looping embedded video** (can be YouTube or self-hosted MP4) showcasing a highlight moment.
+   - Add a rounded border or frame around the video.
+
+7. **Testimonial Section**
+   - Create a **card carousel** (use Swiper.js or a lightweight slider).
+   - Each testimonial card animates into view (fade/slide).
+   - Card design: glassmorphism or blurred backgrounds, circular avatar image, minimal text.
+
+8. **CTA Banner**
+   - Full-width angled or curved divider separating the last section.
+   - Bold call-to-action text with animated entrance (fade-up or zoom-in).
+   - CTA button with ripple effect on click.
+
+9. **Footer**
+   - Minimalist dark footer with social media icons, newsletter signup form, and quick links.
+   - Icons should animate lightly on hover (grow or color shift).
+
+10. **Technology Requirements**
+    - **HTML5** and **CSS3** with advanced usage of Flexbox and Grid.
+    - Add small **JavaScript file** for:
+      - scroll-triggered animations
+      - carousel behavior
+      - mobile menu toggle
+    - If available, use libraries:
+      - AOS.js for scroll animations
+      - Swiper.js for sliders
+      - GSAP (optional) for smoother complex animations
+    - Fully responsive for all devices.
+    - SEO-friendly: use correct `<meta>`, `<alt>`, and semantic tags.
+
+11. **File Outputs**
+    - Provide `index.html`, `styles.css`, and `scripts.js`.
+    - Include comments marking major sections.
+    - Use placeholder
