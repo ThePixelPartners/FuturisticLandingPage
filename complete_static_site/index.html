@@ -1634,6 +1634,71 @@
         }
         
         /* === Animations === */
+        /* Smooth transitions between sections */
+        section {
+            transition: transform 0.8s ease, opacity 0.8s ease;
+            will-change: transform, opacity;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Floating dots animation */
+        .floating-dots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(0, 183, 255, 0.2);
+            animation: floating 20s infinite alternate ease-in-out;
+        }
+        
+        @keyframes floating {
+            0% { transform: translate(var(--start-x), var(--start-y)); }
+            100% { transform: translate(var(--end-x), var(--end-y)); }
+        }
+        
+        .gradient-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(110, 0, 255, 0.1), transparent 70%),
+                        radial-gradient(circle at 70% 70%, rgba(0, 183, 255, 0.1), transparent 70%);
+            z-index: 0;
+            animation: pulse-gradients 8s infinite alternate ease-in-out;
+        }
+        
+        @keyframes pulse-gradients {
+            0% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.5; }
+        }
+        
+        .section-transition-up {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        
+        .section-transition-down {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .section-visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
         @keyframes scan {
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
@@ -2293,6 +2358,8 @@
     
     <!-- Testimonials Section -->
     <section class="testimonials-section" id="testimonials">
+        <div class="floating-dots"></div>
+        <div class="gradient-bg"></div>
         <div class="testimonial-shapes">
             <div class="shape shape-triangle" style="top: 10%; left: 5%;"></div>
             <div class="shape shape-circle" style="top: 30%; right: 10%;"></div>
@@ -2408,7 +2475,169 @@
     </section>
     
     <!-- Solutions Section -->
+    <!-- Experience Parallel Section -->
+    <section class="experience-section" id="experience">
+        <div class="floating-dots"></div>
+        <div class="gradient-bg"></div>
+        <div class="container">
+            <div class="section-heading">
+                <div class="section-badge">Dimensional Experience</div>
+                <h2 class="section-title">Experience Parallel</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">
+                    Step into a world where digital reality transcends conventional boundaries, enabling capabilities 
+                    that were once thought impossible. Our dimensional gateway offers unprecedented access.
+                </p>
+            </div>
+            
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-vr-cardboard"></i>
+                        <div class="experience-icon-glow"></div>
+                    </div>
+                    <h3 class="experience-title">Immersive Interfaces</h3>
+                    <p class="experience-description">
+                        Multi-dimensional visualization systems that transform complex data into navigable environments with intuitive interaction models.
+                    </p>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-brain"></i>
+                        <div class="experience-icon-glow"></div>
+                    </div>
+                    <h3 class="experience-title">Neural Integration</h3>
+                    <p class="experience-description">
+                        Cognitive amplification through AI-assisted thought modeling and memory augmentation capabilities.
+                    </p>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-project-diagram"></i>
+                        <div class="experience-icon-glow"></div>
+                    </div>
+                    <h3 class="experience-title">Quantum Simulations</h3>
+                    <p class="experience-description">
+                        Access to probability field manipulations that enable predictive modeling beyond standard computational limits.
+                    </p>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-cube"></i>
+                        <div class="experience-icon-glow"></div>
+                    </div>
+                    <h3 class="experience-title">Dimensional Constructs</h3>
+                    <p class="experience-description">
+                        Create persistent objects with pseudo-physical properties that respond to both digital and analog interactions.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="experience-showcase">
+                <div class="showcase-visual">
+                    <div class="showcase-frame">
+                        <div class="holographic-content"></div>
+                        <div class="scan-lines"></div>
+                        <div class="frame-corner top-left"></div>
+                        <div class="frame-corner top-right"></div>
+                        <div class="frame-corner bottom-left"></div>
+                        <div class="frame-corner bottom-right"></div>
+                    </div>
+                </div>
+                <div class="showcase-content">
+                    <h3 class="showcase-title">Hyperconnected Reality</h3>
+                    <p class="showcase-description">
+                        Experience collaborative environments where distance is merely a conceptual limitation, 
+                        not a practical one. Connect with colleagues and resources across any boundary through 
+                        our quantum-entangled network infrastructure.
+                    </p>
+                    <ul class="showcase-features">
+                        <li>Transcend traditional spatiotemporal constraints</li>
+                        <li>Seamless collaboration across dimensional boundaries</li>
+                        <li>Persistent access to evolving information landscapes</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary showcase-btn">
+                        EXPERIENCE DEMO
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Industry Solutions Section -->
+    <section class="industry-section" id="industry">
+        <div class="floating-dots"></div>
+        <div class="gradient-bg"></div>
+        <div class="container">
+            <div class="section-heading">
+                <div class="section-badge">Tailored Applications</div>
+                <h2 class="section-title">Industry Solutions</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">
+                    Our dimensional technology adapts to the unique challenges of various sectors, 
+                    providing transformative capabilities that redefine what's possible.
+                </p>
+            </div>
+            
+            <div class="industry-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="healthcare">Healthcare</button>
+                    <button class="tab-btn" data-tab="finance">Finance</button>
+                    <button class="tab-btn" data-tab="manufacturing">Manufacturing</button>
+                    <button class="tab-btn" data-tab="research">Research</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-panel active" id="healthcare-panel">
+                        <div class="panel-image">
+                            <div class="panel-overlay">
+                                <div class="panel-data-point">
+                                    <span class="dot"></span>
+                                    <span class="label">Diagnostic Precision: 99.8%</span>
+                                </div>
+                                <div class="panel-data-point">
+                                    <span class="dot"></span>
+                                    <span class="label">Treatment Optimization: +87%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <h3 class="panel-title">Healthcare Revolution</h3>
+                            <p class="panel-description">
+                                Our dimensional technology enables unprecedented visualization of complex biological systems, 
+                                allowing for non-invasive diagnostics and treatment planning at the quantum level.
+                            </p>
+                            <ul class="panel-features">
+                                <li>Multi-dimensional medical imaging and analysis</li>
+                                <li>Predictive patient outcome modeling with 99.8% accuracy</li>
+                                <li>Quantum-accelerated drug discovery and personalization</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="finance-panel">
+                        <!-- Finance content would go here -->
+                    </div>
+                    
+                    <div class="tab-panel" id="manufacturing-panel">
+                        <!-- Manufacturing content would go here -->
+                    </div>
+                    
+                    <div class="tab-panel" id="research-panel">
+                        <!-- Research content would go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
     <section class="cta-section" id="solutions">
+        <div class="floating-dots"></div>
+        <div class="gradient-bg"></div>
         <div class="container">
             <div class="cta-content">
                 <div class="section-badge">Solutions</div>
@@ -2427,6 +2656,78 @@
                     <a href="#" class="btn btn-secondary">
                         LEARN MORE
                     </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Get Started Today Section -->
+    <section class="get-started-section" id="get-started">
+        <div class="floating-dots"></div>
+        <div class="gradient-bg"></div>
+        <div class="container">
+            <div class="started-grid">
+                <div class="started-content">
+                    <div class="section-badge">Begin Your Journey</div>
+                    <h2 class="section-title">Get Started Today</h2>
+                    <p class="started-description">
+                        Taking the first step into dimensional technology is simpler than you might think. 
+                        Our onboarding specialists will guide you through the entire process of implementation 
+                        and integration with your existing systems.
+                    </p>
+                    
+                    <div class="started-steps">
+                        <div class="step">
+                            <div class="step-number">01</div>
+                            <div class="step-content">
+                                <h3 class="step-title">Initial Consultation</h3>
+                                <p class="step-description">
+                                    We'll assess your specific needs and dimensional readiness to create a tailored implementation plan.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">02</div>
+                            <div class="step-content">
+                                <h3 class="step-title">Gateway Setup</h3>
+                                <p class="step-description">
+                                    Our specialists will establish your dimensional gateway and configure your access protocols.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">03</div>
+                            <div class="step-content">
+                                <h3 class="step-title">Dimensional Integration</h3>
+                                <p class="step-description">
+                                    We'll integrate our technology with your existing infrastructure and provide comprehensive training.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn btn-primary get-started-btn">
+                        <span class="btn-content">
+                            BEGIN JOURNEY
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="started-visual">
+                    <div class="portal-frame">
+                        <div class="portal-scan-effect"></div>
+                        <div class="portal-data">
+                            <div class="data-line"></div>
+                            <div class="data-line"></div>
+                            <div class="data-line"></div>
+                        </div>
+                        <div class="portal-status-indicator">
+                            <span class="status-dot"></span>
+                            <span class="status-text">GATEWAY READY</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2615,6 +2916,90 @@
                     this.style.transform = 'scale(1)';
                 }, 100);
             });
+            
+            // Create floating dots
+            const createFloatingDots = () => {
+                const dotsContainers = document.querySelectorAll('.floating-dots');
+                
+                dotsContainers.forEach(container => {
+                    // Clear any existing dots
+                    container.innerHTML = '';
+                    
+                    // Create 30 random dots in each container
+                    for (let i = 0; i < 30; i++) {
+                        const dot = document.createElement('div');
+                        dot.className = 'dot';
+                        
+                        // Random position
+                        const x = Math.random() * 100;
+                        const y = Math.random() * 100;
+                        dot.style.left = `${x}%`;
+                        dot.style.top = `${y}%`;
+                        
+                        // Random size
+                        const size = Math.random() * 4 + 1;
+                        dot.style.width = `${size}px`;
+                        dot.style.height = `${size}px`;
+                        
+                        // Random animation duration and delay
+                        const duration = Math.random() * 10 + 10;
+                        const delay = Math.random() * 5;
+                        dot.style.animationDuration = `${duration}s`;
+                        dot.style.animationDelay = `${delay}s`;
+                        
+                        // Random direction
+                        const startX = Math.random() * 100;
+                        const startY = Math.random() * 100;
+                        const endX = Math.random() * 100;
+                        const endY = Math.random() * 100;
+                        
+                        dot.style.setProperty('--start-x', `${startX}px`);
+                        dot.style.setProperty('--start-y', `${startY}px`);
+                        dot.style.setProperty('--end-x', `${endX}px`);
+                        dot.style.setProperty('--end-y', `${endY}px`);
+                        
+                        // Random color - cyan or purple with varying opacity
+                        const color = Math.random() > 0.5 
+                            ? `rgba(0, 183, 255, ${Math.random() * 0.3 + 0.1})`
+                            : `rgba(168, 85, 247, ${Math.random() * 0.3 + 0.1})`;
+                        dot.style.backgroundColor = color;
+                        
+                        container.appendChild(dot);
+                    }
+                });
+            };
+            
+            // Add scroll animations for sections
+            const setupSectionAnimations = () => {
+                const sections = document.querySelectorAll('section');
+                
+                // Initial state - start sections hidden
+                sections.forEach((section, index) => {
+                    if (index > 0) { // Skip hero section
+                        section.classList.add(index % 2 === 0 ? 'section-transition-up' : 'section-transition-down');
+                    }
+                });
+                
+                // Intersection observer to detect when sections come into view
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('section-visible');
+                        }
+                    });
+                }, { threshold: 0.2 }); // Trigger when 20% of section is visible
+                
+                // Observe all sections except the hero
+                sections.forEach((section, index) => {
+                    if (index > 0) {
+                        observer.observe(section);
+                    }
+                });
+            };
+            
+            // Initialize the floating dots and section transitions
+            createFloatingDots();
+            setupSectionAnimations();
         });
     </script>
 </body>
