@@ -5,17 +5,17 @@ export default function Hero() {
         <div className="flex flex-col md:flex-row items-center">
           {/* Left Content */}
           <div className="w-full md:w-1/2 text-center md:text-left md:pr-12 mb-12 md:mb-0">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 font-montserrat tracking-tight">
-              Transform Your Business with Parallel
+            <h1 className="title-large text-white mb-6">
+              Innovative Solutions for Modern Businesses
             </h1>
             <p className="text-white opacity-90 text-lg mb-8 max-w-lg mx-auto md:mx-0">
-              Unleash your company's potential with our innovative solutions that drive growth and efficiency.
+              Transform your organization with our cutting-edge platform and unlock new possibilities for growth, efficiency, and success.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
-              <a href="#" className="btn-gradient text-white px-8 py-3 rounded-full text-base uppercase font-semibold shadow-lg inline-block">
+              <a href="#" className="btn-primary">
                 Get Started
               </a>
-              <a href="#" className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full text-base uppercase font-semibold hover:bg-white hover:text-[hsl(var(--primary-purple))] transition-colors inline-block">
+              <a href="#" className="btn-secondary bg-transparent border-2 border-white text-white hover:bg-white hover:text-[hsl(var(--primary-blue))]">
                 Learn More
               </a>
             </div>
@@ -23,11 +23,15 @@ export default function Hero() {
           
           {/* Right Image */}
           <div className="w-full md:w-1/2">
-            <img 
-              src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" 
-              alt="Team collaborating on a digital project" 
-              className="rounded-lg shadow-2xl w-full h-auto"
-            />
+            <div className="relative">
+              <div className="absolute -top-10 -left-10 w-24 h-24 bg-[hsl(var(--primary-purple))] rounded-full opacity-20"></div>
+              <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-[hsl(var(--secondary-teal))] rounded-full opacity-20"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+                alt="Digital business transformation" 
+                className="rounded-lg shadow-2xl w-full h-auto relative z-10"
+              />
+            </div>
           </div>
         </div>
       </div>

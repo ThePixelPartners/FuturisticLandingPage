@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useScrollPosition } from "@/lib/utils";
 
 export default function Header() {
@@ -16,49 +16,50 @@ export default function Header() {
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="text-2xl font-bold font-montserrat z-10">
-            <span className={`${isScrolled ? "text-[hsl(var(--neutral-dark))]" : "text-white"}`}>
-              Parallel
+          <a href="#" className="font-bold text-2xl z-10 flex items-center">
+            <span className="text-[hsl(var(--primary-blue))] mr-1">P</span>
+            <span className={`${isScrolled ? "text-[hsl(var(--text-black))]" : "text-white"}`}>
+              arallel
             </span>
           </a>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
             <a 
               href="#" 
-              className={`hover:opacity-80 font-montserrat text-sm uppercase font-medium ${
-                isScrolled ? "text-[hsl(var(--neutral-dark))]" : "text-white"
+              className={`font-medium hover:text-[hsl(var(--primary-blue))] transition-colors ${
+                isScrolled ? "text-[hsl(var(--text-black))]" : "text-white"
               }`}
             >
               Home
             </a>
             <a 
               href="#features" 
-              className={`hover:opacity-80 font-montserrat text-sm uppercase font-medium ${
-                isScrolled ? "text-[hsl(var(--neutral-dark))]" : "text-white"
+              className={`font-medium hover:text-[hsl(var(--primary-blue))] transition-colors ${
+                isScrolled ? "text-[hsl(var(--text-black))]" : "text-white"
               }`}
             >
               Features
             </a>
             <a 
               href="#about" 
-              className={`hover:opacity-80 font-montserrat text-sm uppercase font-medium ${
-                isScrolled ? "text-[hsl(var(--neutral-dark))]" : "text-white"
+              className={`font-medium hover:text-[hsl(var(--primary-blue))] transition-colors ${
+                isScrolled ? "text-[hsl(var(--text-black))]" : "text-white"
               }`}
             >
               About
             </a>
             <a 
               href="#testimonials" 
-              className={`hover:opacity-80 font-montserrat text-sm uppercase font-medium ${
-                isScrolled ? "text-[hsl(var(--neutral-dark))]" : "text-white"
+              className={`font-medium hover:text-[hsl(var(--primary-blue))] transition-colors ${
+                isScrolled ? "text-[hsl(var(--text-black))]" : "text-white"
               }`}
             >
               Testimonials
             </a>
             <a 
               href="#contact" 
-              className="btn-gradient px-6 py-2 rounded-full text-sm uppercase font-medium"
+              className="btn-primary ml-2"
             >
               Get Started
             </a>
@@ -66,11 +67,12 @@ export default function Header() {
           
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-white focus:outline-none z-10" 
+            className="md:hidden focus:outline-none z-10" 
             aria-label="Open mobile menu"
             onClick={() => setMobileMenuOpen(true)}
           >
-            <svg className={`w-6 h-6 ${isScrolled ? "text-[hsl(var(--neutral-dark))]" : "text-white"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className={`w-6 h-6 ${isScrolled ? "text-[hsl(var(--text-black))]" : "text-white"}`} 
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
           </button>
@@ -79,9 +81,13 @@ export default function Header() {
       
       {/* Mobile Navigation Drawer */}
       <div className={`mobile-nav ${mobileMenuOpen ? "active" : ""}`}>
-        <div className="flex justify-end">
+        <div className="flex justify-between items-center mb-8">
+          <a href="#" className="font-bold text-2xl">
+            <span className="text-[hsl(var(--primary-blue))]">P</span>
+            <span className="text-[hsl(var(--text-black))]">arallel</span>
+          </a>
           <button 
-            className="text-gray-800 focus:outline-none" 
+            className="text-[hsl(var(--text-black))] focus:outline-none" 
             aria-label="Close mobile menu"
             onClick={() => setMobileMenuOpen(false)}
           >
@@ -90,38 +96,38 @@ export default function Header() {
             </svg>
           </button>
         </div>
-        <div className="mt-8 flex flex-col space-y-6">
+        <div className="flex flex-col space-y-5">
           <a 
             href="#" 
-            className="text-[hsl(var(--neutral-dark))] hover:text-[hsl(var(--primary-purple))] font-montserrat text-sm uppercase font-medium"
+            className="text-[hsl(var(--text-black))] font-medium hover:text-[hsl(var(--primary-blue))] transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             Home
           </a>
           <a 
             href="#features" 
-            className="text-[hsl(var(--neutral-dark))] hover:text-[hsl(var(--primary-purple))] font-montserrat text-sm uppercase font-medium"
+            className="text-[hsl(var(--text-black))] font-medium hover:text-[hsl(var(--primary-blue))] transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             Features
           </a>
           <a 
             href="#about" 
-            className="text-[hsl(var(--neutral-dark))] hover:text-[hsl(var(--primary-purple))] font-montserrat text-sm uppercase font-medium"
+            className="text-[hsl(var(--text-black))] font-medium hover:text-[hsl(var(--primary-blue))] transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             About
           </a>
           <a 
             href="#testimonials" 
-            className="text-[hsl(var(--neutral-dark))] hover:text-[hsl(var(--primary-purple))] font-montserrat text-sm uppercase font-medium"
+            className="text-[hsl(var(--text-black))] font-medium hover:text-[hsl(var(--primary-blue))] transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             Testimonials
           </a>
           <a 
             href="#contact" 
-            className="btn-gradient text-white px-6 py-2 rounded-full text-center text-sm uppercase font-medium"
+            className="btn-primary text-center mt-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             Get Started
