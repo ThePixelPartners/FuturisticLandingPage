@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#14b8a6;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.7" />
+    </linearGradient>
+    
+    <!-- Particle animations -->
+    <circle id="particle" r="3" fill="white" opacity="0.6" />
+    
+    <!-- Animations -->
+    <animateTransform id="rotate1" attributeName="transform" attributeType="XML" type="rotate" from="0 960 540" to="360 960 540" dur="60s" repeatCount="indefinite" />
+    <animate id="fade1" attributeName="opacity" from="0.8" to="0.4" dur="8s" repeatCount="indefinite" />
+    
+    <!-- Background patterns -->
+    <pattern id="pattern1" x="0" y="0" width="300" height="300" patternUnits="userSpaceOnUse">
+      <path d="M0,100 L100,0 L200,100 L300,0" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none">
+        <animateTransform attributeName="transform" attributeType="XML" type="translate" from="0 0" to="300 300" dur="40s" repeatCount="indefinite" />
+      </path>
+    </pattern>
+    
+    <pattern id="pattern2" x="0" y="0" width="400" height="400" patternUnits="userSpaceOnUse">
+      <circle cx="200" cy="200" r="50" stroke="rgba(255,255,255,0.15)" stroke-width="1" fill="none">
+        <animate attributeName="r" from="50" to="150" dur="10s" repeatCount="indefinite" />
+      </circle>
+    </pattern>
+    
+    <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#grad1)" />
+  
+  <!-- Animated patterns -->
+  <rect width="100%" height="100%" fill="url(#pattern1)" opacity="0.5">
+    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 960 540" to="10 960 540" dur="40s" repeatCount="indefinite" />
+  </rect>
+  <rect width="100%" height="100%" fill="url(#pattern2)" opacity="0.3">
+    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 960 540" to="-10 960 540" dur="50s" repeatCount="indefinite" />
+  </rect>
+  
+  <!-- Animated shapes -->
+  <g opacity="0.4" filter="url(#blur1)">
+    <ellipse cx="400" cy="300" rx="300" ry="150" fill="url(#grad2)">
+      <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 400 300" to="360 400 300" dur="40s" repeatCount="indefinite" />
+      <animate attributeName="ry" values="150;200;150" dur="20s" repeatCount="indefinite" />
+    </ellipse>
+    
+    <ellipse cx="1500" cy="700" rx="250" ry="200" fill="url(#grad2)">
+      <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 1500 700" to="-360 1500 700" dur="45s" repeatCount="indefinite" />
+      <animate attributeName="rx" values="250;350;250" dur="22s" repeatCount="indefinite" />
+    </ellipse>
+    
+    <ellipse cx="960" cy="540" rx="450" ry="350" fill="url(#grad2)" opacity="0.3">
+      <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 960 540" to="360 960 540" dur="90s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;0.5;0.3" dur="15s" repeatCount="indefinite" />
+    </ellipse>
+  </g>
+  
+  <!-- Particles -->
+  <g>
+    <use xlink:href="#particle" x="500" y="300">
+      <animate attributeName="x" values="500;550;500" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="y" values="300;400;300" dur="5s" repeatCount="indefinite" />
+    </use>
+    <use xlink:href="#particle" x="800" y="600">
+      <animate attributeName="x" values="800;830;800" dur="7s" repeatCount="indefinite" />
+      <animate attributeName="y" values="600;650;600" dur="5s" repeatCount="indefinite" />
+    </use>
+    <use xlink:href="#particle" x="1200" y="250">
+      <animate attributeName="x" values="1200;1250;1200" dur="6s" repeatCount="indefinite" />
+      <animate attributeName="y" values="250;300;250" dur="8s" repeatCount="indefinite" />
+    </use>
+    <use xlink:href="#particle" x="1500" y="500">
+      <animate attributeName="x" values="1500;1450;1500" dur="5s" repeatCount="indefinite" />
+      <animate attributeName="y" values="500;550;500" dur="6s" repeatCount="indefinite" />
+    </use>
+    <use xlink:href="#particle" x="700" y="800">
+      <animate attributeName="x" values="700;750;700" dur="9s" repeatCount="indefinite" />
+      <animate attributeName="y" values="800;750;800" dur="7s" repeatCount="indefinite" />
+    </use>
+    <use xlink:href="#particle" x="1000" y="900">
+      <animate attributeName="x" values="1000;950;1000" dur="8s" repeatCount="indefinite" />
+      <animate attributeName="y" values="900;950;900" dur="9s" repeatCount="indefinite" />
+    </use>
+    <use xlink:href="#particle" x="1300" y="700">
+      <animate attributeName="x" values="1300;1350;1300" dur="7s" repeatCount="indefinite" />
+      <animate attributeName="y" values="700;650;700" dur="6s" repeatCount="indefinite" />
+    </use>
+    <use xlink:href="#particle" x="600" y="400">
+      <animate attributeName="x" values="600;650;600" dur="6s" repeatCount="indefinite" />
+      <animate attributeName="y" values="400;450;400" dur="7s" repeatCount="indefinite" />
+    </use>
+    <use xlink:href="#particle" x="900" y="200">
+      <animate attributeName="x" values="900;950;900" dur="5s" repeatCount="indefinite" />
+      <animate attributeName="y" values="200;150;200" dur="8s" repeatCount="indefinite" />
+    </use>
+    <use xlink:href="#particle" x="1100" y="500">
+      <animate attributeName="x" values="1100;1150;1100" dur="9s" repeatCount="indefinite" />
+      <animate attributeName="y" values="500;450;500" dur="6s" repeatCount="indefinite" />
+    </use>
+  </g>
+</svg>

@@ -1,4 +1,33 @@
+import { useRef, useEffect } from 'react';
+
 export default function Features() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('feature-visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    
+    const featureCards = document.querySelectorAll('.feature-card');
+    featureCards.forEach((card) => {
+      observer.observe(card);
+    });
+    
+    return () => {
+      featureCards.forEach((card) => {
+        observer.unobserve(card);
+      });
+    };
+  }, []);
+  
   const features = [
     {
       icon: "fa-chart-line",
@@ -39,9 +68,9 @@ export default function Features() {
   ];
 
   return (
-    <section id="features" className="section-padding section-gray">
+    <section id="features" className="section-padding section-gray" ref={sectionRef}>
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" data-aos="fade-up">
           <h2 className="title-section">Powerful Features for Your Business</h2>
           <p className="subtitle max-w-3xl mx-auto">
             Our platform offers a comprehensive suite of tools designed to enhance efficiency, 
@@ -51,9 +80,15 @@ export default function Features() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="feature-card">
-              <div className="flex items-start">
-                <div className={`bg-[hsl(var(--${feature.color}))] bg-opacity-10 p-4 rounded-lg mr-4`}>
+            <div 
+              key={index} 
+              className="feature-card glass-card opacity-0" 
+              data-aos="fade-up" 
+              data-aos-delay={100 + index * 50}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="flex items-start p-6">
+                <div className={`bg-[hsl(var(--${feature.color}))] bg-opacity-20 p-4 rounded-lg mr-4`}>
                   <i className={`fas ${feature.icon} text-xl text-[hsl(var(--${feature.color}))]`}></i>
                 </div>
                 <div>
@@ -63,6 +98,9 @@ export default function Features() {
                   </p>
                 </div>
               </div>
+              
+              {/* Hover effect overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[hsl(var(--primary-blue))] opacity-0 transition-opacity duration-300 rounded-lg hover:opacity-10"></div>
             </div>
           ))}
         </div>

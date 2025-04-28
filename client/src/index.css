@@ -174,12 +174,20 @@ html {
   
   /* Card styles */
   .feature-card {
-    @apply bg-white rounded-lg p-6 shadow-md transition-all duration-300;
+    @apply bg-white rounded-lg shadow-md transition-all duration-500 relative;
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  
+  .feature-visible, 
+  [data-aos-animate].aos-animate {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
   
   .feature-card:hover {
-    @apply transform -translate-y-2 shadow-xl;
-    transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+    @apply shadow-xl;
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg) translateY(-8px);
   }
   
   .testimonial-card {
