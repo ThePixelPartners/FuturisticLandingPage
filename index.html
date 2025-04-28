@@ -788,7 +788,7 @@
         
         /* Find Us hover feature */
         .find-us-container {
-            position: absolute;
+            position: fixed;
             top: 30%;
             right: 10%;
             width: 120px;
@@ -887,14 +887,16 @@
             font-size: 0.6rem;
             text-transform: uppercase;
             opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
             text-align: center;
             white-space: nowrap;
+            visibility: hidden;
         }
         
         .find-us-indicator:hover .coordinates-indicator {
             opacity: 1;
             transform: translate(-50%, 100%);
+            visibility: visible;
         }
         
         .find-us-modal {
