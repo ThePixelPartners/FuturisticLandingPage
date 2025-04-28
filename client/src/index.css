@@ -452,6 +452,84 @@ html {
   .subtitle {
     @apply text-lg text-blue-100 mb-8;
   }
+  
+  /* Mystery & Storytelling Typography */
+  .mystery-text {
+    @apply relative font-mono;
+    letter-spacing: 0.05em;
+    color: rgba(0, 183, 255, 0.9);
+    text-shadow: 0 0 5px rgba(0, 183, 255, 0.5);
+  }
+  
+  .typed-text {
+    overflow: hidden;
+    border-right: 3px solid #00b7ff;
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  .glitch-text {
+    position: relative;
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    animation: glitch 500ms infinite;
+  }
+  
+  @keyframes glitch {
+    0% {
+      text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                  -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                  0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    14% {
+      text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                  -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                  0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    15% {
+      text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                   0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                  -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    49% {
+      text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                   0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                  -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    50% {
+      text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                   0.05em 0 0 rgba(0, 255, 0, 0.75),
+                   0 -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    99% {
+      text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                   0.05em 0 0 rgba(0, 255, 0, 0.75),
+                   0 -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+    100% {
+      text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
+                  -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
+                  -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+    }
+  }
+  
+  .redacted-text {
+    position: relative;
+    color: transparent;
+  }
+  
+  .redacted-text::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 0.18em;
+    background-color: rgba(255, 255, 255, 0.7);
+    transform: translateY(-50%);
+  }
 
   /* Video styles */
   .video-highlight {
@@ -494,6 +572,99 @@ html {
   .data-label {
     @apply text-xs;
     color: rgba(255, 255, 255, 0.7);
+  }
+  
+  /* Mystery Portal Elements */
+  .portal-frame {
+    @apply relative rounded-xl overflow-hidden;
+    border: 2px solid rgba(0, 183, 255, 0.4);
+    box-shadow: 0 0 30px rgba(0, 183, 255, 0.3),
+                inset 0 0 20px rgba(0, 183, 255, 0.2);
+  }
+  
+  .portal-scanner {
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(to bottom,
+                transparent 0%,
+                rgba(0, 183, 255, 0.15) 50%,
+                transparent 100%);
+    background-size: 100% 20px;
+    animation: scan-lines 2s linear infinite;
+  }
+  
+  .portal-ripple {
+    @apply absolute top-1/2 left-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2 pointer-events-none;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 183, 255, 0.6);
+    opacity: 0;
+    animation: portal-ripple 4s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  }
+  
+  .portal-ripple:nth-child(2) {
+    animation-delay: 1s;
+  }
+  
+  .portal-ripple:nth-child(3) {
+    animation-delay: 2s;
+  }
+  
+  @keyframes portal-ripple {
+    0% {
+      width: 0%;
+      height: 0%;
+      opacity: 0.8;
+    }
+    100% {
+      width: 200%;
+      height: 200%;
+      opacity: 0;
+    }
+  }
+  
+  /* Data streams */
+  .data-stream {
+    @apply absolute top-0 h-full w-1 pointer-events-none opacity-50;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 183, 255, 0.5) 0%,
+      rgba(0, 183, 255, 0.7) 5%,
+      transparent 5%,
+      transparent 10%
+    );
+    background-size: 10px 20px;
+    animation: data-streaming 15s linear infinite;
+  }
+  
+  .cyber-border-glow {
+    @apply absolute inset-0 rounded-xl transition-opacity duration-300;
+    box-shadow: inset 0 0 5px rgba(0, 183, 255, 0.3),
+                0 0 10px rgba(0, 183, 255, 0.5);
+  }
+  
+  /* Typing animation */
+  .typing-effect {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 4s steps(40, end);
+    border-right: 2px solid transparent;
+  }
+  
+  .animate-blink {
+    animation: blink 1s step-end infinite;
+  }
+  
+  /* Mysterious backgrounds */
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(0, 183, 255, 0.3) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 183, 255, 0.3) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-from) 0%, var(--tw-gradient-via, transparent) 40%, var(--tw-gradient-to, transparent) 100%);
   }
 
   /* Blurs for glow effects */
