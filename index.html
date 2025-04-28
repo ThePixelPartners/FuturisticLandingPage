@@ -758,6 +758,18 @@
             backdrop-filter: blur(5px);
         }
         
+        .portal-terminal {
+            position: absolute;
+            width: 80%;
+            max-width: 400px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(0, 183, 255, 0.3);
+        }
+        
         .terminal-line {
             display: flex;
             align-items: center;
@@ -2214,22 +2226,23 @@
                     </a>
                 </div>
                 
-                <div class="terminal-output">
-                    <div class="terminal-line">
-                        <div class="terminal-prefix">[SYS]</div>
-                        <div class="terminal-text">Dimensional gateway initialized. Awaiting authorization...</div>
-                    </div>
-                    
-                    <div class="terminal-line">
-                        <div class="terminal-prefix user">[USR]</div>
-                        <div class="terminal-text">Access permitted. Welcome, traveler.</div>
-                        <span class="cursor"></span>
-                    </div>
                 </div>
             </div>
             
             <div class="hero-image">
                 <div class="portal-card" id="portalCard">
+                    <div class="terminal-output portal-terminal">
+                        <div class="terminal-line">
+                            <div class="terminal-prefix">[SYS]</div>
+                            <div class="terminal-text">Dimensional gateway initialized. Awaiting authorization...</div>
+                        </div>
+                        
+                        <div class="terminal-line">
+                            <div class="terminal-prefix user">[USR]</div>
+                            <div class="terminal-text">Access permitted. Welcome, traveler.</div>
+                            <span class="cursor"></span>
+                        </div>
+                    </div>
                     <!-- Tech Circuit SVG -->
                     <div class="tech-circuit-container">
                         <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
@@ -2762,8 +2775,18 @@
             
             <div class="experience-showcase">
                 <div class="showcase-visual">
-                    <div class="showcase-frame">
-                        <div class="holographic-content"></div>
+                    <div class="showcase-frame video-container">
+                        <div class="video-overlay"></div>
+                        <div class="video-loader">
+                            <div class="loader-ring"></div>
+                            <div class="loader-text">INITIALIZING VIDEO STREAM</div>
+                        </div>
+                        <iframe src="https://www.youtube.com/embed/vw9zyxm860Q?autoplay=0&mute=1&controls=1&loop=1&modestbranding=1&showinfo=0&rel=0" 
+                                title="Parallel Experience Demo" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                                class="embedded-video"></iframe>
                         <div class="scan-lines"></div>
                         <div class="frame-corner top-left"></div>
                         <div class="frame-corner top-right"></div>
@@ -2783,7 +2806,8 @@
                         <li>Seamless collaboration across dimensional boundaries</li>
                         <li>Persistent access to evolving information landscapes</li>
                     </ul>
-                    <a href="#" class="btn btn-secondary showcase-btn">
+                    <a href="#" class="btn btn-secondary showcase-btn" id="playDemoVideo">
+                        <span class="play-icon"><i class="fas fa-play"></i></span>
                         EXPERIENCE DEMO
                     </a>
                 </div>
