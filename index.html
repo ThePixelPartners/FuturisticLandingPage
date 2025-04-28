@@ -2000,9 +2000,15 @@
             transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
         }
         
-        .video-container:hover {
+        .video-container:hover, .video-container.active {
             transform: scale(1.02);
             box-shadow: 0 0 40px rgba(0, 183, 255, 0.4);
+        }
+        
+        .video-container.active {
+            transform: scale(1.05);
+            box-shadow: 0 0 60px rgba(0, 183, 255, 0.6);
+            z-index: 5;
         }
         
         .embedded-video {
@@ -3393,7 +3399,112 @@
             
             // Run tab setup
             setupTabs();
+            
+            // Video functionality
+            setupVideoInteraction();
+            
+            // Smooth scroll for navigation
+            setupSmoothScroll();
+            
+            // Section animations on scroll
+            setupSectionAnimations();
         });
+        
+        function setupSectionAnimations() {
+            // Add intersection observer for section animations
+            const sections = document.querySelectorAll('.about-section, .experience-section, .industry-section, .testimonials-section, .cta-section, .get-started-section');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-visible');
+                        // Unobserve after animation is triggered
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+        }
+        
+        function setupSmoothScroll() {
+            // Select all links with hashes
+            document.querySelectorAll('a[href*="#"]').forEach(link => {
+                // Only target links to the current page
+                if (link.pathname === window.location.pathname && link.hash !== '') {
+                    link.addEventListener('click', function(e) {
+                        // Only prevent default if not hash-only link
+                        if (this.hash !== '') {
+                            e.preventDefault();
+                            const targetElement = document.querySelector(this.hash);
+                            if (targetElement) {
+                                // Add smooth scrolling effect
+                                window.scrollTo({
+                                    top: targetElement.offsetTop - 100, // Offset for fixed header
+                                    behavior: 'smooth'
+                                });
+                                
+                                // If mobile menu is open, close it
+                                const mobileNav = document.getElementById('mobileNav');
+                                if (mobileNav && mobileNav.classList.contains('active')) {
+                                    toggleMobileMenu();
+                                }
+                                
+                                // Update URL hash
+                                history.pushState(null, null, this.hash);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        
+        function setupVideoInteraction() {
+            const playDemoButton = document.getElementById('playDemoVideo');
+            const videoContainer = document.querySelector('.video-container');
+            const videoFrame = document.querySelector('.embedded-video');
+            const videoLoader = document.querySelector('.video-loader');
+            
+            if (playDemoButton && videoContainer && videoFrame) {
+                playDemoButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Display loader
+                    if (videoLoader) {
+                        videoLoader.style.opacity = '1';
+                        setTimeout(() => {
+                            videoLoader.style.opacity = '0';
+                        }, 2000);
+                    }
+                    
+                    // Extract current iframe src
+                    let currentSrc = videoFrame.getAttribute('src');
+                    
+                    // Modify URL to autoplay
+                    if (currentSrc.includes('autoplay=0')) {
+                        currentSrc = currentSrc.replace('autoplay=0', 'autoplay=1');
+                        videoFrame.setAttribute('src', currentSrc);
+                    }
+                    
+                    // Add active class to container
+                    videoContainer.classList.add('active');
+                    
+                    // Scroll to video container
+                    videoContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Change button text
+                    playDemoButton.innerHTML = '<span class="play-icon"><i class="fas fa-sync-alt"></i></span> RESTART DEMO';
+                });
+            }
+        }
     </script>
 </body>
 </html>
