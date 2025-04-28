@@ -291,6 +291,212 @@
             opacity: 0.7;
             transition: opacity 0.3s ease;
         }
+
+        /* Find Us hover feature */
+        .find-us-container {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 120px;
+            height: 120px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .find-us-indicator {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 183, 255, 0.4);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .find-us-indicator:hover {
+            opacity: 1;
+            box-shadow: 0 0 20px rgba(0, 183, 255, 0.3);
+        }
+
+        .find-us-indicator::before {
+            content: "";
+            position: absolute;
+            inset: 10px;
+            border-radius: 50%;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            animation: spin 15s linear infinite;
+        }
+
+        .find-us-indicator::after {
+            content: "";
+            position: absolute;
+            inset: 25px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 183, 255, 0.2);
+            animation: spin 10s linear infinite reverse;
+        }
+
+        .pulse-circle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--cyan-400);
+            animation: pulse-animation 2s infinite;
+        }
+
+        .pulse-circle:nth-child(1) {
+            top: 20%;
+            right: 20%;
+        }
+
+        .pulse-circle:nth-child(2) {
+            top: 50%;
+            right: 30%;
+            animation-delay: 0.5s;
+            background-color: var(--purple-500);
+            opacity: 0.7;
+        }
+
+        .pulse-circle:nth-child(3) {
+            bottom: 20%;
+            right: 40%;
+            animation-delay: 1s;
+            background-color: var(--cyan-500);
+            opacity: 0.5;
+        }
+
+        .find-us-text {
+            font-family: monospace;
+            color: var(--cyan-400);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .find-us-indicator:hover .find-us-text {
+            opacity: 1;
+        }
+
+        .find-us-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .find-us-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .find-us-modal-content {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 183, 255, 0.5);
+            padding: 2rem;
+            border-radius: 1rem;
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(0, 183, 255, 0.3);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-family: monospace;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--cyan-400), var(--purple-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glitch 3s infinite;
+        }
+
+        .modal-subtitle {
+            color: var(--cyan-400);
+            font-family: monospace;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .close-modal:hover {
+            opacity: 1;
+        }
+
+        .portal-ripple {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 1px solid var(--cyan-400);
+            opacity: 0;
+            animation: ripple 3s linear infinite;
+        }
+
+        .portal-ripple:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .portal-ripple:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes ripple {
+            0% { width: 0%; height: 0%; opacity: 0.5; }
+            100% { width: 100%; height: 100%; opacity: 0; }
+        }
+
+        @keyframes glitch {
+            0% { opacity: 1; }
+            1% { opacity: 0.8; transform: translate(2px, 0); }
+            2% { opacity: 1; transform: translate(0, 0); }
+            53% { opacity: 1; }
+            54% { opacity: 0.8; transform: translate(-3px, 0); }
+            55% { opacity: 1; transform: translate(0, 0); }
+            100% { opacity: 1; }
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
     </style>
 </head>
 <body>
@@ -298,6 +504,28 @@
     <div class="grid-pattern"></div>
     <div class="glow-effect"></div>
     <div class="glow-effect"></div>
+    
+    <!-- Find Us hover feature -->
+    <div class="find-us-container" id="findUsBtn">
+        <div class="find-us-indicator">
+            <div class="pulse-circle"></div>
+            <div class="pulse-circle"></div>
+            <div class="pulse-circle"></div>
+            <div class="find-us-text">FIND US</div>
+        </div>
+    </div>
+    
+    <!-- Find Us Modal -->
+    <div class="find-us-modal" id="findUsModal">
+        <div class="find-us-modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <div class="modal-title">FIND US</div>
+            <div class="modal-subtitle">COORDINATES CLASSIFIED</div>
+            <div class="portal-ripple"></div>
+            <div class="portal-ripple"></div>
+            <div class="portal-ripple"></div>
+        </div>
+    </div>
     
     <div class="container">
         <div class="logo">TRANSMISSION_INCOMING</div>
@@ -328,7 +556,7 @@
             </div>
         </div>
         
-        <a href="https://thepixelpartners.github.io/FuturisticLandingPage/" class="cta-btn">
+        <a href="#" class="cta-btn" id="initializeBtn">
             <span>
                 <div class="pulse-dot"></div>
                 INITIALIZE SEQUENCE
@@ -346,34 +574,37 @@
     </div>
     
     <script>
-        // Add animation for scan effect
-        document.head.insertAdjacentHTML('beforeend', `
-            <style>
-                @keyframes scan {
-                    0% { transform: translateX(-100%); }
-                    100% { transform: translateX(100%); }
+        // Find Us feature functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const findUsBtn = document.getElementById('findUsBtn');
+            const findUsModal = document.getElementById('findUsModal');
+            const closeModal = document.getElementById('closeModal');
+            const initializeBtn = document.getElementById('initializeBtn');
+            
+            findUsBtn.addEventListener('click', function() {
+                findUsModal.classList.add('active');
+            });
+            
+            closeModal.addEventListener('click', function() {
+                findUsModal.classList.remove('active');
+            });
+            
+            // Close modal when clicking outside the content
+            findUsModal.addEventListener('click', function(e) {
+                if (e.target === findUsModal) {
+                    findUsModal.classList.remove('active');
                 }
-            </style>
-        `);
-        
-        // If you have a deployed version of your app, uncomment below to redirect
-        /*
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check if we should redirect to the actual application
-            const redirectToApp = () => {
-                window.location.href = 'https://yourusername.github.io/your-repo/app/';
-            };
+            });
             
-            // Optional: Add a delay before redirecting
-            // setTimeout(redirectToApp, 3000);
-            
-            // Or use the button to navigate
-            document.querySelector('.cta-btn').addEventListener('click', (e) => {
+            // Initialize button animation
+            initializeBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                redirectToApp();
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 100);
             });
         });
-        */
     </script>
 </body>
 </html>
