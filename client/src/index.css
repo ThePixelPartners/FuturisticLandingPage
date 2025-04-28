@@ -24,11 +24,16 @@
   --ring: 20 14.3% 4.1%;
   --radius: 0.5rem;
 
-  /* Parallel theme colors */
-  --primary-purple: 263 60% 47%;
-  --primary-pink: 325 50% 44%;
-  --neutral-light: 210 20% 98%;
-  --neutral-dark: 0 0% 20%;
+  /* Parallel theme colors - updated to match Canva template */
+  --primary-blue: 221 83% 53%;     /* #2563eb */
+  --primary-purple: 261 73% 58%;   /* #8b5cf6 */
+  --primary-pink: 340 82% 59%;     /* #ec4899 */
+  --secondary-teal: 172 66% 50%;   /* #14b8a6 */
+  --secondary-orange: 32 95% 44%;  /* #d97706 */
+  --neutral-light: 210 20% 98%;    /* #f8fafc */
+  --neutral-gray: 220 14% 96%;     /* #f1f5f9 */
+  --neutral-dark: 215 25% 27%;     /* #334155 */
+  --text-black: 0 0% 12%;          /* #1f1f1f */
 }
 
 .dark {
@@ -70,39 +75,78 @@
 }
 
 @layer components {
+  /* Gradients & Background styles */
   .hero-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary-purple)) 0%, hsl(var(--primary-pink)) 100%);
+    background: linear-gradient(135deg, hsl(var(--primary-blue)) 0%, hsl(var(--primary-purple)) 100%);
   }
-
-  .btn-gradient {
-    @apply bg-gradient-to-r from-[hsl(var(--primary-purple))] to-[hsl(var(--primary-pink))] text-white transition-all duration-300;
+  
+  .section-gray {
+    @apply bg-[hsl(var(--neutral-gray))];
   }
-
-  .btn-gradient:hover {
-    @apply shadow-lg transform -translate-y-1;
+  
+  /* Button styles */
+  .btn-primary {
+    @apply bg-[hsl(var(--primary-blue))] text-white px-6 py-3 rounded-md font-medium transition-all duration-300;
   }
-
-  .card-lift {
-    @apply transition-all duration-300;
+  
+  .btn-primary:hover {
+    @apply bg-[hsl(var(--primary-purple))] shadow-lg;
   }
-
-  .card-lift:hover {
+  
+  .btn-secondary {
+    @apply border-2 border-[hsl(var(--primary-blue))] text-[hsl(var(--primary-blue))] px-6 py-3 rounded-md font-medium transition-all duration-300;
+  }
+  
+  .btn-secondary:hover {
+    @apply bg-[hsl(var(--primary-blue))] text-white shadow-md;
+  }
+  
+  /* Card styles */
+  .feature-card {
+    @apply bg-white rounded-lg p-6 shadow-md transition-all duration-300;
+  }
+  
+  .feature-card:hover {
     @apply transform -translate-y-2 shadow-xl;
   }
-
-  .testimonial-section {
-    @apply bg-[#F3F4FF];
+  
+  .testimonial-card {
+    @apply bg-white rounded-lg p-8 shadow-md;
   }
-
+  
+  /* Section styles */
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+  
+  .testimonial-section {
+    @apply bg-[hsl(var(--neutral-gray))];
+  }
+  
+  /* Header styles */
   .header {
     @apply transition-all duration-300;
   }
-
+  
+  /* Mobile menu styles */
   .mobile-nav {
-    @apply fixed inset-y-0 right-0 w-64 bg-white shadow-lg py-4 px-6 z-40 transform translate-x-full transition-transform duration-300 ease-in-out;
+    @apply fixed inset-y-0 right-0 w-72 bg-white shadow-lg py-8 px-6 z-40 transform translate-x-full transition-transform duration-300 ease-in-out;
   }
-
+  
   .mobile-nav.active {
     @apply translate-x-0;
+  }
+  
+  /* Typography styles */
+  .title-large {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-[hsl(var(--text-black))] leading-tight;
+  }
+  
+  .title-section {
+    @apply text-3xl md:text-4xl font-bold text-[hsl(var(--text-black))] leading-tight mb-4;
+  }
+  
+  .subtitle {
+    @apply text-lg text-[hsl(var(--neutral-dark))] mb-8;
   }
 }
