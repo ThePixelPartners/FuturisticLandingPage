@@ -119,7 +119,7 @@
         }
         
         .logo-rest {
-            background: linear-gradient(to right, var(--cyan-400), #3b82f6);
+            background: linear-gradient(to right, var(--cyan-400), var(--purple-500), #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -392,6 +392,46 @@
             background-color: #00b7ff;
             transform: translate(50%, 50%);
             animation-delay: 4s;
+        }
+        
+        /* Floating dots background */
+        .floating-dots {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: rgba(0, 183, 255, 0.4);
+            animation: float-random 15s infinite linear;
+        }
+        
+        @keyframes float-random {
+            0% { transform: translate(0, 0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translate(100px, -100px); opacity: 0; }
+        }
+        
+        /* Gradient pulsating background */
+        .gradient-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            background: radial-gradient(circle at center, rgba(0, 183, 255, 0.4) 0%, rgba(110, 0, 255, 0.4) 50%, rgba(0, 0, 0, 0) 70%);
+            animation: pulse-bg 8s infinite alternate;
+            pointer-events: none;
+        }
+        
+        @keyframes pulse-bg {
+            0% { transform: scale(0.9); opacity: 0.05; }
+            50% { transform: scale(1.1); opacity: 0.08; }
+            100% { transform: scale(0.9); opacity: 0.05; }
         }
         
         .hero-content {
@@ -835,6 +875,26 @@
         
         .find-us-indicator:hover .find-us-text {
             opacity: 1;
+        }
+        
+        .coordinates-indicator {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--cyan-400);
+            font-family: monospace;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .find-us-indicator:hover .coordinates-indicator {
+            opacity: 1;
+            transform: translate(-50%, 100%);
         }
         
         .find-us-modal {
@@ -1803,6 +1863,7 @@
             <div class="pulse-circle"></div>
             <div class="pulse-circle"></div>
             <div class="find-us-text">FIND US</div>
+            <div class="coordinates-indicator">COORDINATES CLASSIFIED</div>
         </div>
     </div>
     
@@ -1821,6 +1882,8 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="grid-pattern"></div>
+        <div class="floating-dots" id="floatingDots"></div>
+        <div class="gradient-bg"></div>
         <div class="glow-effect"></div>
         <div class="glow-effect"></div>
         
@@ -1932,6 +1995,8 @@
     <!-- Features Section -->
     <section class="features-section" id="features">
         <div class="cyber-grid"></div>
+        <div class="floating-dots"></div>
+        <div class="gradient-bg"></div>
         
         <div class="container">
             <div class="section-heading">
@@ -2136,6 +2201,8 @@
     
     <!-- About Section -->
     <section class="about-section" id="about">
+        <div class="floating-dots"></div>
+        <div class="gradient-bg"></div>
         <div class="container">
             <div class="section-heading">
                 <div class="section-badge">About Us</div>
