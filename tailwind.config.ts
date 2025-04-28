@@ -88,8 +88,8 @@ export default {
           "50%": { transform: "translateY(-5px)" },
         },
         "pulse-slow": {
-          "0%, 100%": { transform: "scale(1)" },
-          "50%": { transform: "scale(1.03)" },
+          "0%, 100%": { opacity: "0.3", transform: "scale(1)" },
+          "50%": { opacity: "0.8", transform: "scale(1.03)" },
         },
         typing: {
           from: { width: "0" },
