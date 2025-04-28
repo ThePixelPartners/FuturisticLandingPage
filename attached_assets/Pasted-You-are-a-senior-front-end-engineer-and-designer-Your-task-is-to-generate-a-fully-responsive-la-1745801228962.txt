@@ -1,0 +1,54 @@
+You are a senior front-end engineer and designer. Your task is to generate a **fully responsive** landing page that **exactly follows** the layout, typography, color palette, and spacing of the Canva “Parallel” template at https://12989252e22342.my.canva.site/parallel-website. Use modern HTML5, semantic tags, and CSS3 (Tailwind CSS if available, otherwise plain CSS with Flexbox/Grid). Include minimal JavaScript only for interactivity (e.g. mobile nav toggle, testimonial carousel).
+
+**Requirements:**
+
+1. **Global Styles & Setup**
+   - Use the same gradient background on the hero (exact color stops from the Canva example).
+   - Base font: ‘Montserrat’ for headings, ‘Open Sans’ for body text (import via Google Fonts).
+   - Define a consistent spacing scale (e.g. 1rem, 1.5rem, 2rem).
+   - Set up a mobile-first responsive grid.
+
+2. **Header & Navigation**
+   - Place a transparent header over the hero; on scroll it turns solid white with a subtle shadow.
+   - Logo on the left (use placeholder SVG), nav links on the right. On screens <768px collapse into a hamburger menu with slide-in drawer.
+
+3. **Hero Section**
+   - Full viewport height.
+   - Split layout: left side text block (headline, subheading, primary CTA button), right side hero image (use a high-res placeholder).
+   - Headline size, line-height, and letter-spacing matching the example.
+   - Button style: rounded pill, hover transition, shadow.
+
+4. **Feature Highlights**
+   - Three equal-width cards in a row: each with icon (SVG placeholder), title, short description.
+   - Card background white, fully rounded corners, center-aligned content, hover lift effect.
+
+5. **Content Blocks (Alternate Layouts)**
+   - Two sections that alternate image/text alignment.
+     - Section A: image left, text right.
+     - Section B: text left, image right.
+   - Match padding, image aspect ratio, and headline/paragraph styling.
+
+6. **Testimonials**
+   - A 3-item carousel or staggered grid on a soft pastel background.
+   - Each testimonial includes user avatar (circular), quote text, and name/title.
+   - Include prev/next controls or dots for carousel.
+
+7. **Call-to-Action Banner**
+   - Full-width colored strip with a concise message and a secondary CTA button.
+
+8. **Footer**
+   - Dark background, white text.
+   - Four columns: quick links, resources, social icons, newsletter signup form.
+   - Include form with email input and submit button.
+
+9. **Accessibility & SEO**
+   - All images get `alt` attributes.
+   - Buttons and links have `aria-labels` where needed.
+   - Include `<meta>` tags for viewport, description, and Open Graph (use placeholder values).
+
+10. **Output**
+    - Provide `index.html`, `styles.css` (and `tailwind.config.js` if using Tailwind), and any small `script.js`.
+    - Comment each major section clearly.
+    - Ensure the final page looks pixel-perfect compared to the Canva example, and works beautifully on desktop, tablet, and mobile.
+
+Start by analyzing the Canva URL’s design details (colors, fonts, spacing, component shapes), then generate the complete codebase.
