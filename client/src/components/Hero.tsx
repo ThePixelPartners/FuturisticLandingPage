@@ -1,12 +1,98 @@
-import { useEffect, useRef } from 'react';
-import placeholderVideo from '../assets/videos/placeholder.svg';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
 export default function Hero() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const heroRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
   const ctaContainerRef = useRef<HTMLDivElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
+  const particlesRef = useRef<HTMLDivElement>(null);
+
+  // Handle mouse movement for parallax effect
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (heroRef.current) {
+        const { clientX, clientY } = e;
+        const { width, height } = heroRef.current.getBoundingClientRect();
+        const x = (clientX / width - 0.5) * 2; // -1 to 1
+        const y = (clientY / height - 0.5) * 2; // -1 to 1
+        setMousePosition({ x, y });
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Apply parallax effect based on mouse position
+  useEffect(() => {
+    if (imageContainerRef.current) {
+      gsap.to(imageContainerRef.current, {
+        x: mousePosition.x * 20,
+        y: mousePosition.y * 20,
+        duration: 1,
+        ease: 'power2.out',
+      });
+    }
+
+    // Move particles in opposite direction for depth effect
+    if (particlesRef.current) {
+      gsap.to(particlesRef.current.children, {
+        x: -mousePosition.x * 30,
+        y: -mousePosition.y * 30,
+        duration: 1,
+        ease: 'power2.out',
+        stagger: 0.05,
+      });
+    }
+  }, [mousePosition]);
+
+  // Create animated particles
+  useEffect(() => {
+    if (particlesRef.current) {
+      const particles = particlesRef.current;
+      
+      // Clear existing particles
+      particles.innerHTML = '';
+      
+      // Create new particles
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        
+        // Randomize particle appearance and position
+        const size = Math.random() * 6 + 1;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const opacity = Math.random() * 0.5 + 0.1;
+        const animationDuration = Math.random() * 20 + 10;
+        const animationDelay = Math.random() * 5;
+        
+        // Assign random colors from our futuristic palette
+        const colors = [
+          'rgba(0, 255, 255, 0.8)', // Cyan
+          'rgba(255, 0, 255, 0.8)', // Magenta
+          'rgba(0, 255, 187, 0.8)', // Teal
+          'rgba(111, 0, 255, 0.8)', // Purple
+          'rgba(0, 183, 255, 0.8)', // Blue
+        ];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        particle.className = 'absolute rounded-full';
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.backgroundColor = color;
+        particle.style.boxShadow = `0 0 ${size * 2}px ${color}`;
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
+        particle.style.opacity = `${opacity}`;
+        particle.style.animation = `float ${animationDuration}s ease-in-out ${animationDelay}s infinite alternate`;
+        
+        particles.appendChild(particle);
+      }
+    }
+  }, []);
 
   // GSAP animation on component mount
   useEffect(() => {
@@ -24,67 +110,160 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="min-h-screen flex items-center pt-20 relative overflow-hidden">
-      {/* Background Video */}
-      <div className="video-background">
-        <img 
-          src={placeholderVideo}
-          alt="Background animation" 
-          className="w-full h-full object-cover"
-        />
+    <section 
+      ref={heroRef}
+      className="min-h-screen flex items-center pt-20 relative overflow-hidden"
+    >
+      {/* Futuristic Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0d101e] via-[#141b33] to-[#0a0d19] z-0"></div>
+      
+      {/* Grid Pattern */}
+      <div className="absolute inset-0 z-0 opacity-10">
+        <div className="absolute inset-0" style={{ 
+          backgroundImage: 'linear-gradient(rgba(0, 183, 255, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 183, 255, 0.3) 1px, transparent 1px)', 
+          backgroundSize: '50px 50px',
+          perspective: '500px',
+          transform: `rotateX(60deg) scale(2) translateZ(-100px)`
+        }}></div>
       </div>
-      <div className="video-overlay"></div>
+      
+      {/* Animated Particles */}
+      <div ref={particlesRef} className="absolute inset-0 z-0"></div>
+      
+      {/* Glow Effects */}
+      <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 rounded-full bg-[#6e00ff] opacity-10 blur-[150px] transform -translate-x-1/2 -translate-y-1/2 animate-pulse-slow"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-1/2 h-1/2 rounded-full bg-[#00b7ff] opacity-10 blur-[150px] transform translate-x-1/2 translate-y-1/2 animate-pulse-slow"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col md:flex-row items-center">
           {/* Left Content */}
           <div className="w-full md:w-1/2 text-center md:text-left md:pr-12 mb-12 md:mb-0">
+            <div className="mb-6 inline-block">
+              <span className="px-4 py-1 text-sm bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full text-white uppercase tracking-wide font-medium">
+                Next-Gen Technology
+              </span>
+            </div>
             <h1 
               ref={headlineRef} 
-              className="title-large text-white mb-6"
-              data-aos="fade-up"
-              data-aos-delay="100"
+              className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-600 title-large mb-6"
             >
-              Innovative Solutions for Modern Businesses
+              The Future of Digital
+              <span className="relative ml-3 inline-block">
+                Solutions
+                <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-purple-500"></span>
+              </span>
             </h1>
             <p 
               ref={paragraphRef}
-              className="text-white opacity-90 text-lg mb-8 max-w-lg mx-auto md:mx-0"
-              data-aos="fade-up"
-              data-aos-delay="200"
+              className="text-blue-100 text-lg mb-8 max-w-lg mx-auto md:mx-0"
             >
-              Transform your organization with our cutting-edge platform and unlock new possibilities for growth, efficiency, and success.
+              Transform your organization with our cutting-edge platform, leveraging AI-powered insights and quantum-secure architecture for unprecedented growth and efficiency.
             </p>
+            
+            {/* Metrics */}
+            <div className="grid grid-cols-3 gap-2 mb-8 border border-cyan-900/30 rounded-lg p-4 backdrop-blur-sm bg-cyan-900/10">
+              <div className="text-center">
+                <div className="text-cyan-400 text-2xl font-bold">99.9%</div>
+                <div className="text-blue-200 text-xs">Uptime</div>
+              </div>
+              <div className="text-center">
+                <div className="text-purple-400 text-2xl font-bold">2,500+</div>
+                <div className="text-blue-200 text-xs">Clients</div>
+              </div>
+              <div className="text-center">
+                <div className="text-cyan-400 text-2xl font-bold">3.2TB</div>
+                <div className="text-blue-200 text-xs">Data Processed</div>
+              </div>
+            </div>
+            
+            {/* CTA Buttons */}
             <div 
               ref={ctaContainerRef}
               className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start"
-              data-aos="fade-up"
-              data-aos-delay="300"
             >
-              <a href="#features" className="btn-primary btn-ripple">
-                Get Started
+              <a 
+                href="#features" 
+                className="relative overflow-hidden group px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/50 hover:scale-105"
+              >
+                <span className="relative z-10">Get Started</span>
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-full h-1 bg-white opacity-20"></span>
+                <span className="absolute top-0 right-0 w-8 h-8 -mt-2 -mr-2 rounded-full bg-cyan-300 blur-xl opacity-70 animate-pulse-slow"></span>
               </a>
-              <a href="#" className="btn-secondary bg-transparent border-2 border-white text-white hover:bg-white hover:text-[hsl(var(--primary-blue))]">
-                Learn More
+              <a 
+                href="#" 
+                className="relative group px-8 py-4 border border-cyan-400/30 hover:border-cyan-400/80 rounded-lg text-white backdrop-blur-sm bg-cyan-900/10 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-900/20"
+              >
+                <span className="text-gradient-cyan">Learn More</span>
+                <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></span>
               </a>
             </div>
           </div>
           
-          {/* Right Image */}
+          {/* Right Image/3D Object */}
           <div 
             ref={imageContainerRef} 
-            className="w-full md:w-1/2"
-            data-aos="zoom-in"
-            data-aos-delay="400"
+            className="w-full md:w-1/2 perspective-1000"
           >
-            <div className="relative float-animation">
-              <div className="absolute -top-10 -left-10 w-24 h-24 bg-[hsl(var(--primary-purple))] rounded-full opacity-20"></div>
-              <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-[hsl(var(--secondary-teal))] rounded-full opacity-20"></div>
-              <img 
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
-                alt="Digital business transformation" 
-                className="rounded-lg shadow-2xl w-full h-auto relative z-10 glass-card"
-              />
+            <div className="relative transform-gpu transition-all duration-500 hover:scale-105 hover:rotate-3">
+              {/* Glow Effects */}
+              <div className="absolute -left-4 -top-4 w-2/3 h-2/3 bg-purple-500 rounded-full opacity-20 blur-3xl"></div>
+              <div className="absolute -right-4 -bottom-4 w-2/3 h-2/3 bg-cyan-400 rounded-full opacity-20 blur-3xl"></div>
+              
+              {/* Main Content Container */}
+              <div className="glass-panel relative z-10 p-1 rounded-2xl overflow-hidden border border-cyan-400/20 shadow-xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-600/10 backdrop-blur-xl"></div>
+                
+                {/* Tech Circuit Lines */}
+                <div className="absolute inset-0">
+                  <div className="absolute top-0 left-0 w-full h-full">
+                    <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" className="opacity-20">
+                      <path d="M10,10 L390,10 L390,390 L10,390 Z" fill="none" stroke="url(#grad1)" strokeWidth="1" />
+                      <path d="M50,50 L350,50 L350,350 L50,350 Z" fill="none" stroke="url(#grad1)" strokeWidth="1" />
+                      <path d="M10,200 L390,200" fill="none" stroke="url(#grad1)" strokeWidth="1" />
+                      <path d="M200,10 L200,390" fill="none" stroke="url(#grad1)" strokeWidth="1" />
+                      <path d="M10,10 L200,200" fill="none" stroke="url(#grad1)" strokeWidth="1" />
+                      <path d="M390,10 L200,200" fill="none" stroke="url(#grad1)" strokeWidth="1" />
+                      <path d="M10,390 L200,200" fill="none" stroke="url(#grad1)" strokeWidth="1" />
+                      <path d="M390,390 L200,200" fill="none" stroke="url(#grad1)" strokeWidth="1" />
+                      <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#00b7ff" />
+                          <stop offset="100%" stopColor="#6e00ff" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+                
+                {/* Holographic Image */}
+                <div className="relative p-4 overflow-hidden">
+                  <div className="relative transform perspective-1000 hover:rotate-y-12 transition-all duration-700">
+                    <img 
+                      src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+                      alt="Futuristic digital interface" 
+                      className="w-full h-auto rounded-lg z-10 relative"
+                    />
+                    
+                    {/* Holographic Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/30 to-purple-500/30 mix-blend-overlay rounded-lg"></div>
+                    
+                    {/* Scan Lines */}
+                    <div className="absolute inset-0 bg-scan-lines rounded-lg opacity-10"></div>
+                    
+                    {/* Pulsing Dots */}
+                    <div className="absolute top-5 right-5 w-3 h-3 rounded-full bg-cyan-400 animate-pulse shadow-lg shadow-cyan-400"></div>
+                    <div className="absolute bottom-5 left-5 w-3 h-3 rounded-full bg-purple-500 animate-pulse shadow-lg shadow-purple-500" style={{ animationDelay: '1s' }}></div>
+                  </div>
+                </div>
+                
+                {/* Tech Metrics */}
+                <div className="flex justify-between px-4 pb-4 text-xs text-cyan-300 font-mono">
+                  <div>QUANTUM SECURE</div>
+                  <div className="animate-pulse">SYSTEM ONLINE</div>
+                  <div>AI-POWERED</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
