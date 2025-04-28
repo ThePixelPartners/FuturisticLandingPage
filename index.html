@@ -10,6 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="alternate icon" type="image/png" href="favicon.png">
     
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <style>
         /* CSS Variables */
         :root {
@@ -17,6 +20,7 @@
             --cyan-500: #06b6d4;
             --purple-500: #a855f7;
             --purple-600: #9333ea;
+            --pink-500: #ec4899;
             --dark-bg: #0d101e;
             --dark-bg-2: #141b33;
             --dark-bg-3: #0a0d19;
@@ -24,9 +28,11 @@
             --blue-100: #a6c8ff;
         }
         
-        /* Reset & Base Styles */
+        /* === Reset & Base Styles === */
         *, *::before, *::after {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
         
         html {
@@ -34,8 +40,6 @@
         }
         
         body, html {
-            margin: 0;
-            padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             background: linear-gradient(to bottom right, var(--dark-bg), var(--dark-bg-2), var(--dark-bg-3));
             color: var(--light-text);
@@ -46,6 +50,7 @@
         
         h1, h2, h3, h4, h5, h6 {
             margin-top: 0;
+            font-weight: bold;
         }
         
         a {
@@ -58,12 +63,299 @@
             height: auto;
         }
         
-        /* Hero Section */
+        section {
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* === Header Styles === */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background-color: rgba(10, 20, 40, 0.3);
+            backdrop-filter: blur(4px);
+            border-bottom: 1px solid rgba(0, 183, 255, 0);
+            transition: all 0.3s ease;
+        }
+        
+        .header.scrolled {
+            background-color: rgba(10, 20, 40, 0.8);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(0, 183, 255, 0.1);
+            padding: 0.75rem 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-p {
+            color: var(--cyan-400);
+            margin-right: 1px;
+            animation: pulse 2s infinite;
+            text-shadow: 0 0 10px var(--cyan-400);
+        }
+        
+        .logo-rest {
+            background: linear-gradient(to right, var(--cyan-400), #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .desktop-nav a {
+            margin-left: 2rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .desktop-nav a:hover {
+            color: var(--cyan-400);
+        }
+        
+        .desktop-nav a.active::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--cyan-400), var(--purple-500));
+            transform-origin: left;
+            transform: scaleX(1);
+            transition: transform 0.3s ease;
+        }
+        
+        .get-started-btn {
+            padding: 0.5rem 1.25rem;
+            margin-left: 2rem;
+            background: linear-gradient(to right, var(--cyan-500), var(--purple-600));
+            color: white;
+            border-radius: 0.375rem;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .get-started-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 183, 255, 0.4);
+        }
+        
+        .get-started-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--purple-600), var(--cyan-500));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .get-started-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .get-started-btn span {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .btn-arrow {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .get-started-btn:hover .btn-arrow {
+            transform: translateX(3px);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            width: 2rem;
+            height: 2rem;
+            position: relative;
+        }
+        
+        .mobile-menu-btn .hamburger {
+            width: 1.5rem;
+            height: 0.125rem;
+            background-color: var(--cyan-400);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-btn .hamburger::before,
+        .mobile-menu-btn .hamburger::after {
+            content: "";
+            position: absolute;
+            width: 1.5rem;
+            height: 0.125rem;
+            background-color: var(--cyan-400);
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-btn .hamburger::before {
+            transform: translateY(-0.5rem);
+        }
+        
+        .mobile-menu-btn .hamburger::after {
+            transform: translateY(0.5rem);
+        }
+        
+        .mobile-menu-btn.open .hamburger {
+            background-color: transparent;
+        }
+        
+        .mobile-menu-btn.open .hamburger::before {
+            transform: rotate(45deg);
+        }
+        
+        .mobile-menu-btn.open .hamburger::after {
+            transform: rotate(-45deg);
+        }
+        
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background-color: rgba(10, 13, 25, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            z-index: 900;
+            transition: right 0.5s ease;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mobile-nav.active {
+            right: 0;
+        }
+        
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 899;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .mobile-close-btn {
+            background: none;
+            border: none;
+            color: var(--cyan-400);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .mobile-nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(0, 183, 255, 0.1);
+            transition: color 0.3s ease;
+        }
+        
+        .mobile-nav-link:hover {
+            color: var(--cyan-400);
+        }
+        
+        .mobile-nav-link i {
+            color: var(--cyan-400);
+            margin-right: 1rem;
+            width: 1.5rem;
+            text-align: center;
+        }
+        
+        .mobile-get-started {
+            margin-top: 2rem;
+            width: 100%;
+        }
+        
+        /* === Hero Section === */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
+            padding-top: 5rem;
+            background: linear-gradient(to bottom, var(--dark-bg), var(--dark-bg-2));
             position: relative;
+        }
+        
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         
         .grid-pattern {
@@ -102,24 +394,13 @@
             animation-delay: 4s;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
         .hero-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
+            width: 50%;
             z-index: 10;
+            position: relative;
         }
         
-        .badge {
+        .hero-badge {
             display: inline-block;
             padding: 0.5rem 1rem;
             background: linear-gradient(to right, var(--cyan-400), var(--purple-500));
@@ -210,10 +491,8 @@
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
-            justify-content: center;
         }
         
-        /* Buttons */
         .btn {
             display: inline-block;
             padding: 1rem 2rem;
@@ -280,15 +559,202 @@
             box-shadow: 0 0 20px rgba(0, 183, 255, 0.2);
         }
         
+        .btn-secondary::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--cyan-400), var(--purple-500));
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+        
+        .btn-secondary:hover::after {
+            width: 80%;
+        }
+        
+        .hero-image {
+            width: 45%;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .portal-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(0, 183, 255, 0.2);
+            transition: all 0.5s ease;
+            transform: perspective(1000px) rotateY(-5deg);
+            cursor: pointer;
+        }
+        
+        .portal-card:hover {
+            transform: perspective(1000px) rotateY(0deg) translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 183, 255, 0.3);
+        }
+        
+        .tech-circuit-container {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            opacity: 0.2;
+        }
+        
+        .portal-loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 0;
+        }
+        
+        .portal-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid var(--cyan-400);
+            opacity: 0.3;
+            animation: spin 15s linear infinite;
+        }
+        
+        .portal-ring:nth-child(1) {
+            width: 80%;
+            height: 80%;
+        }
+        
+        .portal-ring:nth-child(2) {
+            width: 60%;
+            height: 60%;
+            border-color: var(--purple-500);
+            animation-direction: reverse;
+            animation-duration: 10s;
+        }
+        
+        .portal-ring:nth-child(3) {
+            width: 40%;
+            height: 40%;
+            animation-duration: 5s;
+        }
+        
+        .portal-image {
+            position: relative;
+            z-index: 2;
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        
+        .holographic-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 183, 255, 0.3), rgba(168, 85, 247, 0.3));
+            mix-blend-mode: overlay;
+            z-index: 3;
+        }
+        
+        .scan-lines {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 2px,
+                rgba(0, 183, 255, 0.05) 2px,
+                rgba(0, 183, 255, 0.05) 4px
+            );
+            opacity: 0.2;
+            z-index: 4;
+        }
+        
+        .portal-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 5;
+            font-family: monospace;
+            font-size: 0.75rem;
+        }
+        
+        .portal-status {
+            color: var(--cyan-400);
+            display: flex;
+            align-items: center;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--cyan-400);
+            margin-right: 8px;
+            animation: pulse-animation 2s infinite;
+        }
+        
+        .portal-id {
+            color: var(--purple-500);
+        }
+        
+        .terminal-output {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            font-family: monospace;
+            font-size: 0.875rem;
+            border: 1px solid rgba(0, 183, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .terminal-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .terminal-prefix {
+            color: var(--cyan-400);
+            margin-right: 0.5rem;
+        }
+        
+        .terminal-prefix.user {
+            color: var(--purple-400);
+        }
+        
+        .terminal-text {
+            color: var(--blue-100);
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 0.5rem;
+            height: 1rem;
+            background-color: var(--cyan-400);
+            margin-left: 0.5rem;
+            animation: blink 1s infinite;
+        }
+        
         /* Find Us hover feature */
         .find-us-container {
-            position: fixed;
-            top: 40%;
-            right: 5%;
-            width: 100px;
-            height: 100px;
+            position: absolute;
+            top: 30%;
+            right: 10%;
+            width: 120px;
+            height: 120px;
             cursor: pointer;
-            z-index: 1000;
+            z-index: 100;
         }
         
         .find-us-indicator {
@@ -461,149 +927,653 @@
             animation-delay: 2s;
         }
         
-        /* Portal Section */
-        .portal-section {
-            padding-top: 2rem;
-            display: flex;
-            justify-content: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .portal-card {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 1rem;
+        /* === Features Section === */
+        .features-section {
+            background: linear-gradient(to bottom, var(--dark-bg-2), var(--dark-bg));
+            position: relative;
             overflow: hidden;
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin: 2rem auto;
-            box-shadow: 0 0 30px rgba(0, 183, 255, 0.2);
-            transition: all 0.3s ease;
+            padding: 6rem 0;
         }
         
-        .portal-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0, 183, 255, 0.3);
-        }
-        
-        .tech-circuit-container {
+        .cyber-grid {
             position: absolute;
             inset: 0;
-            pointer-events: none;
-            opacity: 0.2;
-        }
-        
-        .tech-circuit {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .holographic-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to tr, rgba(0, 183, 255, 0.3), rgba(168, 85, 247, 0.3));
-            mix-blend-mode: overlay;
-            border-radius: 1rem;
-        }
-        
-        .scan-lines {
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent,
-                transparent 2px,
-                rgba(0, 183, 255, 0.05) 2px,
-                rgba(0, 183, 255, 0.05) 4px
-            );
-            opacity: 0.2;
-            pointer-events: none;
-        }
-        
-        .portal-image {
-            position: relative;
-            z-index: 1;
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-        
-        .portal-loading {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-image: linear-gradient(rgba(0, 183, 255, 0.2) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(0, 183, 255, 0.2) 1px, transparent 1px);
+            background-size: 100px 100px;
+            opacity: 0.05;
             z-index: 0;
         }
         
-        .portal-ring {
+        .section-heading {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(to right, var(--cyan-500), var(--purple-600));
+            border-radius: 9999px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--cyan-400), var(--purple-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-divider {
+            width: 6rem;
+            height: 0.25rem;
+            background: linear-gradient(to right, var(--cyan-400), var(--purple-500));
+            margin: 0 auto 1.5rem;
+            border-radius: 1rem;
+        }
+        
+        .section-description {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--blue-100);
+            font-size: 1.125rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-card {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 183, 255, 0.2);
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(0, 183, 255, 0.4);
+        }
+        
+        .feature-card::before {
+            content: "";
             position: absolute;
-            border-radius: 50%;
-            border: 2px solid var(--cyan-400);
-            opacity: 0.3;
-            animation: spin 15s linear infinite;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--cyan-500), var(--purple-500));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
-        .portal-ring:nth-child(1) {
-            width: 80%;
-            height: 80%;
+        .feature-card:hover::before {
+            opacity: 1;
         }
         
-        .portal-ring:nth-child(2) {
-            width: 60%;
-            height: 60%;
-            border-color: var(--purple-500);
-            animation-direction: reverse;
-            animation-duration: 10s;
+        .feature-card-inner {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
-        .portal-ring:nth-child(3) {
-            width: 40%;
-            height: 40%;
-            animation-duration: 5s;
-        }
-        
-        .portal-info {
+        .feature-status-bar {
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
             padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.7);
-            font-family: monospace;
-            font-size: 0.75rem;
-            color: var(--cyan-400);
+            border-bottom: 1px solid rgba(0, 183, 255, 0.2);
             display: flex;
             justify-content: space-between;
-            z-index: 2;
-        }
-        
-        .portal-status {
-            display: flex;
             align-items: center;
         }
         
-        .status-dot {
-            width: 8px;
-            height: 8px;
+        .feature-status {
+            display: flex;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--cyan-400);
+            font-family: monospace;
+        }
+        
+        .feature-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .feature-icon i {
+            font-size: 1.5rem;
+            z-index: 1;
+        }
+        
+        .feature-icon-bg {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            opacity: 0.1;
+            background: radial-gradient(circle, rgba(0, 183, 255, 0.8) 0%, rgba(110, 0, 255, 0.4) 70%);
+        }
+        
+        .feature-icon-glow {
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(10px);
+            background: var(--cyan-400);
+            transition: opacity 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon-glow {
+            opacity: 0.5;
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--cyan-400);
+        }
+        
+        .feature-description {
+            color: var(--blue-100);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .feature-explore {
+            margin-top: auto;
+            text-align: center;
+        }
+        
+        .feature-explore-btn {
+            background-color: rgba(0, 183, 255, 0.1);
+            border: 1px solid rgba(0, 183, 255, 0.3);
+            color: var(--cyan-400);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+        
+        .feature-explore-btn:hover {
+            background-color: rgba(0, 183, 255, 0.2);
+            border-color: rgba(0, 183, 255, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .feature-explore-btn i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-explore-btn:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* === About Section === */
+        .about-section {
+            background: linear-gradient(to bottom, var(--dark-bg), var(--dark-bg-3));
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 0;
+        }
+        
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+        
+        .about-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            padding: 0.5rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 183, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: all 0.5s ease;
+        }
+        
+        .about-image-wrapper:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--cyan-400), var(--purple-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .about-description {
+            color: var(--blue-100);
+            margin-bottom: 2rem;
+        }
+        
+        .about-features {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .about-feature {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: rgba(0, 183, 255, 0.05);
+            border: 1px solid rgba(0, 183, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .about-feature:hover {
+            background-color: rgba(0, 183, 255, 0.1);
+            border-color: rgba(0, 183, 255, 0.3);
+            transform: translateX(5px);
+        }
+        
+        .about-feature i {
+            color: var(--cyan-400);
+            font-size: 1.25rem;
+            margin-right: 1rem;
+        }
+        
+        .about-feature-text {
+            font-weight: 500;
+            color: var(--blue-100);
+        }
+        
+        .about-btn {
+            margin-top: 2rem;
+        }
+
+        /* === Testimonials Section === */
+        .testimonials-section {
+            background: linear-gradient(to bottom, var(--dark-bg-3), var(--dark-bg-2));
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 0;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-card {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 183, 255, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(0, 183, 255, 0.4);
+        }
+        
+        .testimonial-card::before {
+            content: """;
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 4rem;
+            color: rgba(0, 183, 255, 0.1);
+            line-height: 1;
+            font-family: serif;
+        }
+        
+        .testimonial-content {
+            color: var(--blue-100);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
+        }
+        
+        .testimonial-rating {
+            display: flex;
+            color: var(--cyan-400);
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-rating i {
+            margin-right: 0.25rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+        }
+        
+        .author-image {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(0, 183, 255, 0.3);
+            margin-right: 1rem;
+            position: relative;
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .testimonial-card:hover .author-image img {
+            transform: scale(1.1);
+        }
+        
+        .author-info {
+            flex-grow: 1;
+        }
+        
+        .author-name {
+            font-weight: bold;
+            color: white;
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-role {
+            font-size: 0.875rem;
+            color: var(--blue-100);
+            opacity: 0.7;
+        }
+        
+        .testimonial-verified {
+            display: flex;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--cyan-400);
+            font-family: monospace;
+        }
+        
+        .verified-dot {
+            width: 0.5rem;
+            height: 0.5rem;
             border-radius: 50%;
             background-color: var(--cyan-400);
             margin-right: 0.5rem;
             animation: pulse-animation 2s infinite;
         }
         
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem 0 1rem;
-            font-size: 0.875rem;
-            color: rgba(166, 200, 255, 0.7);
-            width: 100%;
+        /* Testimonial Shapes */
+        .testimonial-shapes {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
         }
         
-        /* Animations */
+        .shape {
+            position: absolute;
+            opacity: 0.3;
+        }
+        
+        .shape-triangle {
+            width: 100px;
+            height: 100px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            background: linear-gradient(135deg, var(--cyan-400), var(--purple-500));
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        .shape-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--cyan-400);
+            animation: pulse 5s infinite alternate;
+        }
+        
+        .shape-square {
+            width: 70px;
+            height: 70px;
+            border: 2px solid var(--purple-500);
+            animation: spin 10s infinite linear;
+        }
+        
+        /* === Call to Action Section === */
+        .cta-section {
+            background: linear-gradient(135deg, var(--dark-bg-2), var(--dark-bg-3));
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--cyan-400), var(--purple-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .cta-description {
+            color: var(--blue-100);
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        /* === Footer === */
+        .footer {
+            background-color: var(--dark-bg-3);
+            color: var(--blue-100);
+            padding: 4rem 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-branding {
+            max-width: 300px;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-description {
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-section-title {
+            font-size: 1.125rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 2rem;
+            height: 2px;
+            background: linear-gradient(to right, var(--cyan-400), var(--purple-500));
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-link {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-link a {
+            color: var(--blue-100);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-link a:hover {
+            color: var(--cyan-400);
+            opacity: 1;
+            transform: translateX(5px);
+        }
+        
+        .footer-link a::before {
+            content: ">";
+            position: absolute;
+            left: -15px;
+            opacity: 0;
+            color: var(--cyan-400);
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-link a:hover::before {
+            opacity: 1;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 183, 255, 0.2);
+        }
+        
+        .social-link:hover {
+            background: linear-gradient(to right, var(--cyan-500), var(--purple-600));
+            transform: translateY(-3px);
+            border-color: transparent;
+        }
+        
+        .social-link i {
+            color: var(--cyan-400);
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-link:hover i {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(0, 183, 255, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            color: var(--blue-100);
+            opacity: 0.7;
+        }
+        
+        .footer-bottom a {
+            color: var(--cyan-400);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-bottom a:hover {
+            color: var(--purple-500);
+        }
+        
+        /* === Animations === */
         @keyframes scan {
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
@@ -626,6 +1596,14 @@
             to { transform: rotate(360deg); }
         }
         
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-10px) translateX(10px); }
+            50% { transform: translateY(0) translateX(20px); }
+            75% { transform: translateY(10px) translateX(10px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+        
         @keyframes ripple {
             0% { width: 0%; height: 0%; opacity: 0.5; }
             100% { width: 100%; height: 100%; opacity: 0; }
@@ -646,8 +1624,71 @@
             50% { opacity: 0; }
         }
         
-        /* Responsive */
+        /* === Responsive Styles === */
+        @media (max-width: 1024px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content {
+                width: 100%;
+                margin-bottom: 3rem;
+            }
+            
+            .hero-image {
+                width: 80%;
+                max-width: 500px;
+            }
+            
+            .metrics {
+                margin: 0 auto 2rem;
+            }
+            
+            .btn-group {
+                justify-content: center;
+            }
+            
+            .find-us-container {
+                top: 20%;
+                right: 5%;
+                width: 100px;
+                height: 100px;
+            }
+            
+            .about-container {
+                flex-direction: column;
+                gap: 3rem;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
         @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
             .hero-title {
                 font-size: 2.5rem;
             }
@@ -656,42 +1697,105 @@
                 font-size: 1rem;
             }
             
-            .metrics {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-            }
-            
-            .find-us-container {
-                top: 20%;
-                right: 5%;
-                width: 80px;
-                height: 80px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero-title {
+            .section-title, .about-title, .cta-title {
                 font-size: 2rem;
             }
             
-            .hero-description {
-                font-size: 0.9rem;
+            .metrics {
+                grid-template-columns: 1fr;
             }
             
-            .btn-group {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
                 flex-direction: column;
-                width: 100%;
-            }
-            
-            .btn {
-                width: 100%;
+                gap: 1rem;
                 text-align: center;
-                margin-bottom: 1rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <span class="logo-p">P</span>
+                <span class="logo-rest">arallel</span>
+            </a>
+            
+            <nav class="desktop-nav">
+                <a href="#" class="active">Home</a>
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#solutions">Solutions</a>
+                <button class="get-started-btn">
+                    <span>Get Started</span>
+                    <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 7L18 12M18 12L13 17M18 12H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </nav>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open mobile menu">
+                <div class="hamburger"></div>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <a href="#" class="logo">
+                <span class="logo-p">P</span>
+                <span class="logo-rest">arallel</span>
+            </a>
+            <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close mobile menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="mobile-nav-links">
+            <a href="#" class="mobile-nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#features" class="mobile-nav-link">
+                <i class="fas fa-layer-group"></i>
+                <span>Features</span>
+            </a>
+            <a href="#about" class="mobile-nav-link">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </a>
+            <a href="#testimonials" class="mobile-nav-link">
+                <i class="fas fa-quote-right"></i>
+                <span>Testimonials</span>
+            </a>
+            <a href="#solutions" class="mobile-nav-link">
+                <i class="fas fa-puzzle-piece"></i>
+                <span>Solutions</span>
+            </a>
+        </div>
+        
+        <button class="get-started-btn mobile-get-started">
+            <span>Get Started</span>
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 7L18 12M18 12L13 17M18 12H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </div>
+    
     <!-- Find Us hover feature -->
     <div class="find-us-container" id="findUsBtn">
         <div class="find-us-indicator">
@@ -715,14 +1819,14 @@
     </div>
     
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="grid-pattern"></div>
         <div class="glow-effect"></div>
         <div class="glow-effect"></div>
         
-        <div class="container">
+        <div class="container hero-container">
             <div class="hero-content">
-                <div class="badge">TRANSMISSION_INCOMING</div>
+                <div class="hero-badge">TRANSMISSION_INCOMING</div>
                 <h1 class="hero-title">Beyond the Digital <span>Horizon</span></h1>
                 <p class="hero-description">
                     They said it couldn't be done—bridging dimensions through digital space. But in 2037, we discovered the frequency. 
@@ -747,98 +1851,637 @@
                 </div>
                 
                 <div class="btn-group">
-                    <a href="#" class="btn btn-primary" id="initializeBtn">
+                    <a href="#features" class="btn btn-primary" id="initializeBtn">
                         <span class="btn-content">
                             <span class="pulse-dot"></span>
                             INITIALIZE SEQUENCE
                         </span>
                     </a>
-                    <a href="https://github.com/thepixelpartners/FuturisticLandingPage" class="btn btn-secondary">
+                    <a href="#about" class="btn btn-secondary">
                         ACCESS ARCHIVES
                     </a>
                 </div>
                 
-                <!-- Portal Section - Tech Circuit SVG Integration -->
-                <div class="portal-section">
-                    <div class="portal-card">
-                        <!-- Tech Circuit Lines - This was missing from the GitHub Pages version -->
-                        <div class="tech-circuit-container">
-                            <svg class="tech-circuit" width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10,10 L390,10 L390,390 L10,390 Z" fill="none" stroke="url(#grad1)" strokeWidth="1" />
-                                <path d="M50,50 L350,50 L350,350 L50,350 Z" fill="none" stroke="url(#grad1)" strokeWidth="1" />
-                                <path d="M10,200 L390,200" fill="none" stroke="url(#grad1)" strokeWidth="1" />
-                                <path d="M200,10 L200,390" fill="none" stroke="url(#grad1)" strokeWidth="1" />
-                                <path d="M10,10 L200,200" fill="none" stroke="url(#grad1)" strokeWidth="1" />
-                                <path d="M390,10 L200,200" fill="none" stroke="url(#grad1)" strokeWidth="1" />
-                                <path d="M10,390 L200,200" fill="none" stroke="url(#grad1)" strokeWidth="1" />
-                                <path d="M390,390 L200,200" fill="none" stroke="url(#grad1)" strokeWidth="1" />
-                                <defs>
-                                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#00b7ff" />
-                                        <stop offset="100%" stopColor="#6e00ff" />
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                        </div>
-                        
-                        <!-- Portal Background & Effects -->
-                        <div class="portal-loading">
-                            <div class="portal-ring"></div>
-                            <div class="portal-ring"></div>
-                            <div class="portal-ring"></div>
-                        </div>
-                        
-                        <!-- Portal Image -->
-                        <img 
-                            src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
-                            alt="Portal to digital dimension" 
-                            class="portal-image"
-                        />
-                        
-                        <!-- Holographic Overlay -->
-                        <div class="holographic-overlay"></div>
-                        
-                        <!-- Scan Lines -->
-                        <div class="scan-lines"></div>
-                        
-                        <!-- Portal Status Information -->
-                        <div class="portal-info">
-                            <div class="portal-status">
-                                <span class="status-dot"></span>
-                                GATEWAY_ACTIVE
-                            </div>
-                            <div style="color: var(--purple-400);">ID:2037-ALPHA</div>
-                        </div>
+                <div class="terminal-output">
+                    <div class="terminal-line">
+                        <div class="terminal-prefix">[SYS]</div>
+                        <div class="terminal-text">Dimensional gateway initialized. Awaiting authorization...</div>
+                    </div>
+                    
+                    <div class="terminal-line">
+                        <div class="terminal-prefix user">[USR]</div>
+                        <div class="terminal-text">Access permitted. Welcome, traveler.</div>
+                        <span class="cursor"></span>
                     </div>
                 </div>
-                
-                <!-- Terminal-style output -->
-                <div style="width: 100%; max-width: 500px; background: rgba(0, 0, 0, 0.3); border-radius: 0.5rem; padding: 1rem; margin: 2rem 0; font-family: monospace; font-size: 0.875rem; color: var(--blue-100);">
-                    <div class="flex" style="display: flex; align-items: center; margin-bottom: 0.5rem;">
-                        <span style="color: var(--cyan-400); margin-right: 0.5rem;">[SYS]</span>
-                        <span>Dimensional gateway initialized. Awaiting authorization...</span>
+            </div>
+            
+            <div class="hero-image">
+                <div class="portal-card" id="portalCard">
+                    <!-- Tech Circuit SVG -->
+                    <div class="tech-circuit-container">
+                        <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10,10 L390,10 L390,390 L10,390 Z" fill="none" stroke="url(#grad1)" stroke-width="1" />
+                            <path d="M50,50 L350,50 L350,350 L50,350 Z" fill="none" stroke="url(#grad1)" stroke-width="1" />
+                            <path d="M10,200 L390,200" fill="none" stroke="url(#grad1)" stroke-width="1" />
+                            <path d="M200,10 L200,390" fill="none" stroke="url(#grad1)" stroke-width="1" />
+                            <path d="M10,10 L200,200" fill="none" stroke="url(#grad1)" stroke-width="1" />
+                            <path d="M390,10 L200,200" fill="none" stroke="url(#grad1)" stroke-width="1" />
+                            <path d="M10,390 L200,200" fill="none" stroke="url(#grad1)" stroke-width="1" />
+                            <path d="M390,390 L200,200" fill="none" stroke="url(#grad1)" stroke-width="1" />
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#00b7ff" />
+                                    <stop offset="100%" stop-color="#6e00ff" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
                     </div>
-                    <div class="flex" style="display: flex; align-items: center;">
-                        <span style="color: var(--purple-400); margin-right: 0.5rem;">[USR]</span>
-                        <span>Access permitted. Welcome, traveler.</span>
-                        <span style="display: inline-block; width: 0.5rem; height: 1rem; background-color: var(--cyan-400); margin-left: 0.5rem; animation: blink 1s infinite;"></span>
+                    
+                    <!-- Portal Loading Rings -->
+                    <div class="portal-loading">
+                        <div class="portal-ring"></div>
+                        <div class="portal-ring"></div>
+                        <div class="portal-ring"></div>
+                    </div>
+                    
+                    <!-- Portal Image -->
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+                         alt="Portal to digital dimension" 
+                         class="portal-image" />
+                    
+                    <!-- Holographic Overlay -->
+                    <div class="holographic-overlay"></div>
+                    
+                    <!-- Scan Lines -->
+                    <div class="scan-lines"></div>
+                    
+                    <!-- Portal Info -->
+                    <div class="portal-info">
+                        <div class="portal-status">
+                            <span class="status-dot"></span>
+                            GATEWAY_ACTIVE
+                        </div>
+                        <div class="portal-id">ID:2037-ALPHA</div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <footer>
-            &copy; 2037 Parallel Systems • Dimensional Gateway ID:2037-ALPHA
-        </footer>
     </section>
     
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="cyber-grid"></div>
+        
+        <div class="container">
+            <div class="section-heading">
+                <div class="section-badge">Next-Gen Features</div>
+                <h2 class="section-title">Advanced Capabilities</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">
+                    Our platform offers a comprehensive suite of quantum-enhanced tools designed to transcend conventional limitations, 
+                    providing unprecedented levels of intelligence, security, and adaptability.
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-status-bar">
+                        <div class="feature-status">
+                            <span class="status-dot"></span>
+                            <span>SYS.ACTIVE</span>
+                        </div>
+                        <div style="color: var(--cyan-400); font-family: monospace; font-size: 0.75rem;">99.8% accuracy</div>
+                    </div>
+                    
+                    <div class="feature-card-inner">
+                        <div class="feature-icon" style="color: #00b7ff;">
+                            <i class="fas fa-chart-line"></i>
+                            <div class="feature-icon-bg"></div>
+                            <div class="feature-icon-glow" style="background: #00b7ff;"></div>
+                        </div>
+                        
+                        <h3 class="feature-title">AI-Powered Analytics</h3>
+                        <p class="feature-description">
+                            Harness quantum processing algorithms to transform your data into predictive insights that adapt to emerging patterns in real-time.
+                        </p>
+                        
+                        <div class="feature-explore">
+                            <button class="feature-explore-btn">
+                                <span>Explore</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-status-bar">
+                        <div class="feature-status">
+                            <span class="status-dot"></span>
+                            <span>SYS.ACTIVE</span>
+                        </div>
+                        <div style="color: var(--purple-500); font-family: monospace; font-size: 0.75rem;">Zero breaches</div>
+                    </div>
+                    
+                    <div class="feature-card-inner">
+                        <div class="feature-icon" style="color: #6e00ff;">
+                            <i class="fas fa-shield-alt"></i>
+                            <div class="feature-icon-bg"></div>
+                            <div class="feature-icon-glow" style="background: #6e00ff;"></div>
+                        </div>
+                        
+                        <h3 class="feature-title">Quantum Security</h3>
+                        <p class="feature-description">
+                            Deploy post-quantum cryptography with neural safeguards that protect against advanced threats and zero-day exploits.
+                        </p>
+                        
+                        <div class="feature-explore">
+                            <button class="feature-explore-btn">
+                                <span>Explore</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-status-bar">
+                        <div class="feature-status">
+                            <span class="status-dot"></span>
+                            <span>SYS.ACTIVE</span>
+                        </div>
+                        <div style="color: var(--cyan-400); font-family: monospace; font-size: 0.75rem;">5ms latency</div>
+                    </div>
+                    
+                    <div class="feature-card-inner">
+                        <div class="feature-icon" style="color: #00ffd5;">
+                            <i class="fas fa-microchip"></i>
+                            <div class="feature-icon-bg"></div>
+                            <div class="feature-icon-glow" style="background: #00ffd5;"></div>
+                        </div>
+                        
+                        <h3 class="feature-title">Neural Integration</h3>
+                        <p class="feature-description">
+                            Seamlessly interface with existing technologies through our adaptive integration layer with self-healing connection protocols.
+                        </p>
+                        
+                        <div class="feature-explore">
+                            <button class="feature-explore-btn">
+                                <span>Explore</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-status-bar">
+                        <div class="feature-status">
+                            <span class="status-dot"></span>
+                            <span>SYS.ACTIVE</span>
+                        </div>
+                        <div style="color: var(--purple-500); font-family: monospace; font-size: 0.75rem;">∞ scalability</div>
+                    </div>
+                    
+                    <div class="feature-card-inner">
+                        <div class="feature-icon" style="color: #ff9500;">
+                            <i class="fas fa-rocket"></i>
+                            <div class="feature-icon-bg"></div>
+                            <div class="feature-icon-glow" style="background: #ff9500;"></div>
+                        </div>
+                        
+                        <h3 class="feature-title">Hyperdimensional Scaling</h3>
+                        <p class="feature-description">
+                            Our distributed architecture automatically scales computational resources, with self-optimizing load balancing across nodes.
+                        </p>
+                        
+                        <div class="feature-explore">
+                            <button class="feature-explore-btn">
+                                <span>Explore</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card">
+                    <div class="feature-status-bar">
+                        <div class="feature-status">
+                            <span class="status-dot"></span>
+                            <span>SYS.ACTIVE</span>
+                        </div>
+                        <div style="color: var(--cyan-400); font-family: monospace; font-size: 0.75rem;">98% adoption</div>
+                    </div>
+                    
+                    <div class="feature-card-inner">
+                        <div class="feature-icon" style="color: #ff00aa;">
+                            <i class="fas fa-brain"></i>
+                            <div class="feature-icon-bg"></div>
+                            <div class="feature-icon-glow" style="background: #ff00aa;"></div>
+                        </div>
+                        
+                        <h3 class="feature-title">Collective Intelligence</h3>
+                        <p class="feature-description">
+                            Multi-threaded collaboration environments with holographic data visualization and gesture-based interaction paradigms.
+                        </p>
+                        
+                        <div class="feature-explore">
+                            <button class="feature-explore-btn">
+                                <span>Explore</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card">
+                    <div class="feature-status-bar">
+                        <div class="feature-status">
+                            <span class="status-dot"></span>
+                            <span>SYS.ACTIVE</span>
+                        </div>
+                        <div style="color: var(--purple-500); font-family: monospace; font-size: 0.75rem;">24/7 uptime</div>
+                    </div>
+                    
+                    <div class="feature-card-inner">
+                        <div class="feature-icon" style="color: #00b7ff;">
+                            <i class="fas fa-robot"></i>
+                            <div class="feature-icon-bg"></div>
+                            <div class="feature-icon-glow" style="background: #00b7ff;"></div>
+                        </div>
+                        
+                        <h3 class="feature-title">Autonomous Assistance</h3>
+                        <p class="feature-description">
+                            Always-on cognitive assistance with predictive problem resolution and self-evolving knowledge architecture.
+                        </p>
+                        
+                        <div class="feature-explore">
+                            <button class="feature-explore-btn">
+                                <span>Explore</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="section-heading">
+                <div class="section-badge">About Us</div>
+                <h2 class="section-title">Empowering Future Innovations</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="about-container">
+                <div class="about-image">
+                    <div class="about-image-wrapper">
+                        <div class="tech-circuit-container">
+                            <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <pattern id="about-circuit-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                                        <path d="M10,10 L90,10 M10,50 L90,50 M10,90 L90,90 M10,10 L10,90 M50,10 L50,90 M90,10 L90,90" stroke="#00b7ff" stroke-width="1" fill="none" />
+                                        <circle cx="10" cy="10" r="2" fill="#00b7ff" />
+                                        <circle cx="50" cy="10" r="2" fill="#00b7ff" />
+                                        <circle cx="90" cy="10" r="2" fill="#00b7ff" />
+                                        <circle cx="10" cy="50" r="2" fill="#00b7ff" />
+                                        <circle cx="50" cy="50" r="2" fill="#00b7ff" />
+                                        <circle cx="90" cy="50" r="2" fill="#00b7ff" />
+                                        <circle cx="10" cy="90" r="2" fill="#00b7ff" />
+                                        <circle cx="50" cy="90" r="2" fill="#00b7ff" />
+                                        <circle cx="90" cy="90" r="2" fill="#00b7ff" />
+                                    </pattern>
+                                    <rect x="0" y="0" width="100%" height="100%" fill="url(#about-circuit-pattern)" />
+                                </defs>
+                            </svg>
+                        </div>
+                        
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Team working together in modern office" />
+                        
+                        <!-- Status indicators -->
+                        <div class="absolute top-2 right-2 flex space-x-2" style="position: absolute; top: 0.5rem; right: 0.5rem; display: flex; gap: 0.5rem;">
+                            <div style="width: 0.5rem; height: 0.5rem; border-radius: 9999px; background-color: var(--cyan-400); animation: pulse-animation 2s infinite;"></div>
+                            <div style="width: 0.5rem; height: 0.5rem; border-radius: 9999px; background-color: var(--purple-500); animation: pulse-animation 2s infinite; animation-delay: 0.3s;"></div>
+                            <div style="width: 0.5rem; height: 0.5rem; border-radius: 9999px; background-color: var(--cyan-400); animation: pulse-animation 2s infinite; animation-delay: 0.6s;"></div>
+                        </div>
+                        
+                        <!-- Data indicators -->
+                        <div style="position: absolute; bottom: 0.5rem; left: 0.5rem; padding: 0.25rem 0.5rem; background-color: rgba(0, 0, 0, 0.3); backdrop-filter: blur(4px); border-radius: 0.25rem; font-size: 0.75rem; font-family: monospace; color: var(--cyan-400);">
+                            TEAM EFFICIENCY: 98.7%
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-content">
+                    <h2 class="about-title">Quantum-Enhanced Team Collaboration</h2>
+                    <p class="about-description">
+                        We understand the challenges of the digital frontier. Our neural platform transcends conventional processes, 
+                        empowering your team with computational intelligence that adapts to your unique objectives.
+                    </p>
+                    <p class="about-description">
+                        With Parallel, your organization gains access to a dimensional framework, amplifying capability through 
+                        hyperluminal technology and cognitive support systems.
+                    </p>
+                    
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-brain"></i>
+                            <span class="about-feature-text">Neural collaboration matrices</span>
+                        </div>
+                        
+                        <div class="about-feature">
+                            <i class="fas fa-network-wired"></i>
+                            <span class="about-feature-text">Hyperconnected workflow acceleration</span>
+                        </div>
+                        
+                        <div class="about-feature">
+                            <i class="fas fa-chart-bar"></i>
+                            <span class="about-feature-text">Dimensional performance analytics</span>
+                        </div>
+                    </div>
+                    
+                    <div class="about-btn">
+                        <a href="#" class="btn btn-primary">
+                            <span class="btn-content">
+                                Explore Capabilities
+                                <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="testimonial-shapes">
+            <div class="shape shape-triangle" style="top: 10%; left: 5%;"></div>
+            <div class="shape shape-circle" style="top: 30%; right: 10%;"></div>
+            <div class="shape shape-square" style="bottom: 20%; left: 20%;"></div>
+            <div class="shape shape-triangle" style="bottom: 30%; right: 15%;"></div>
+        </div>
+        
+        <div class="container">
+            <div class="section-heading">
+                <div class="section-badge">Client Testimonials</div>
+                <h2 class="section-title">What Our Clients Say</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">
+                    Don't just take our word for it. Here's what our clients have to say about their experience with our futuristic platform.
+                </p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Parallel transformed our approach to data management. The platform's intuitive design and powerful features have significantly improved our productivity and decision-making processes."
+                    </div>
+                    
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Michael Johnson" />
+                        </div>
+                        
+                        <div class="author-info">
+                            <div class="author-name">Michael Johnson</div>
+                            <div class="author-role">CEO, TechNova</div>
+                        </div>
+                        
+                        <div class="testimonial-verified">
+                            <span class="verified-dot"></span>
+                            <span>VERIFIED</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The level of customer support we've received has been exceptional. The team at Parallel has been responsive, knowledgeable, and genuinely invested in our success."
+                    </div>
+                    
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Sophia Rodriguez" />
+                        </div>
+                        
+                        <div class="author-info">
+                            <div class="author-name">Sophia Rodriguez</div>
+                            <div class="author-role">CMO, GrowthMedia</div>
+                        </div>
+                        
+                        <div class="testimonial-verified">
+                            <span class="verified-dot"></span>
+                            <span>VERIFIED</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Implementing Parallel was one of the best business decisions we've made. The ROI has been substantial, and our team productivity has increased by over 40% in just six months."
+                    </div>
+                    
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="David Chen" />
+                        </div>
+                        
+                        <div class="author-info">
+                            <div class="author-name">David Chen</div>
+                            <div class="author-role">CTO, InnovateCorp</div>
+                        </div>
+                        
+                        <div class="testimonial-verified">
+                            <span class="verified-dot"></span>
+                            <span>VERIFIED</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Solutions Section -->
+    <section class="cta-section" id="solutions">
+        <div class="container">
+            <div class="cta-content">
+                <div class="section-badge">Solutions</div>
+                <h2 class="cta-title">Ready To Transcend?</h2>
+                <p class="cta-description">
+                    The boundaries between what is possible and what exists have been dissolved. 
+                    Join the pioneers already exploring dimensions beyond conventional reality.
+                </p>
+                
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <span class="btn-content">
+                            REQUEST ACCESS
+                        </span>
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        LEARN MORE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-branding">
+                    <div class="footer-logo">
+                        <span class="logo-p">P</span>
+                        <span class="logo-rest">arallel</span>
+                    </div>
+                    <p class="footer-description">
+                        Pioneering the intersection of quantum physics and information theory to expand human consciousness beyond traditional dimensional boundaries.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-section">
+                    <h3 class="footer-section-title">Navigation</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Home</a></li>
+                        <li class="footer-link"><a href="#features">Features</a></li>
+                        <li class="footer-link"><a href="#about">About</a></li>
+                        <li class="footer-link"><a href="#testimonials">Testimonials</a></li>
+                        <li class="footer-link"><a href="#solutions">Solutions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links-section">
+                    <h3 class="footer-section-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Privacy Policy</a></li>
+                        <li class="footer-link"><a href="#">Terms of Service</a></li>
+                        <li class="footer-link"><a href="#">Accessibility</a></li>
+                        <li class="footer-link"><a href="#">Dimensional Travel Waiver</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links-section">
+                    <h3 class="footer-section-title">Contact</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="mailto:access@parallel2037.com">access@parallel2037.com</a></li>
+                        <li class="footer-link"><a href="#">Request a Demo</a></li>
+                        <li class="footer-link"><a href="#">Support Portal</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div>&copy; 2037 Parallel Systems • Dimensional Gateway ID:2037-ALPHA</div>
+                <div>Designed in <a href="#">The Quantum Realm</a></div>
+            </div>
+        </div>
+    </footer>
+    
     <script>
-        // Find Us feature functionality
         document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.getElementById('header');
+            
+            function handleScroll() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+            
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Initial check
+            
+            // Mobile menu functionality
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+            const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            
+            function toggleMobileMenu(open) {
+                if (open) {
+                    mobileNav.classList.add('active');
+                    mobileNavOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    mobileMenuBtn.classList.add('open');
+                } else {
+                    mobileNav.classList.remove('active');
+                    mobileNavOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    mobileMenuBtn.classList.remove('open');
+                }
+            }
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                toggleMobileMenu(true);
+            });
+            
+            mobileCloseBtn.addEventListener('click', function() {
+                toggleMobileMenu(false);
+            });
+            
+            mobileNavOverlay.addEventListener('click', function() {
+                toggleMobileMenu(false);
+            });
+            
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    toggleMobileMenu(false);
+                });
+            });
+            
+            // Find Us modal functionality
             const findUsBtn = document.getElementById('findUsBtn');
             const findUsModal = document.getElementById('findUsModal');
             const closeModal = document.getElementById('closeModal');
-            const initializeBtn = document.getElementById('initializeBtn');
             
             findUsBtn.addEventListener('click', function() {
                 findUsModal.classList.add('active');
@@ -848,16 +2491,58 @@
                 findUsModal.classList.remove('active');
             });
             
-            // Close modal when clicking outside the content
             findUsModal.addEventListener('click', function(e) {
                 if (e.target === findUsModal) {
                     findUsModal.classList.remove('active');
                 }
             });
             
+            // Portal card hover animation
+            const portalCard = document.getElementById('portalCard');
+            
+            portalCard.addEventListener('mousemove', function(e) {
+                const rect = portalCard.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateY = (x - centerX) / 20;
+                const rotateX = (centerY - y) / 20;
+                
+                this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+            });
+            
+            portalCard.addEventListener('mouseleave', function() {
+                this.style.transform = 'perspective(1000px) rotateY(-5deg)';
+            });
+            
+            // Smooth scroll for navigation links
+            const navLinks = document.querySelectorAll('a[href^="#"]:not([href="#"])');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 80; // Adjust for header height
+                        
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
             // Initialize button animation
+            const initializeBtn = document.getElementById('initializeBtn');
+            
             initializeBtn.addEventListener('click', function(e) {
-                e.preventDefault();
                 this.style.transform = 'scale(0.95)';
                 setTimeout(() => {
                     this.style.transform = 'scale(1)';
