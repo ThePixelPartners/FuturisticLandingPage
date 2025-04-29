@@ -1335,12 +1335,22 @@
             scroll-behavior: smooth;
             width: 100%;
             margin-bottom: 1rem;
-            animation: slideshow 20s linear infinite;
+            animation: testimonial-slide 15s ease-in-out infinite;
         }
         
         @keyframes slideshow {
             0% { transform: translateX(0); }
             100% { transform: translateX(calc(-350px * 3 - 2rem * 3)); }
+        }
+        
+        /* Enhanced animation for testimonials */
+        @keyframes testimonial-slide {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(calc(-350px * 3 - 2rem * 3));
+            }
         }
         
         .testimonials-wrapper {
