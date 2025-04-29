@@ -1684,11 +1684,17 @@
         /* === Animations === */
         /* Smooth transitions between sections */
         section {
-            transition: transform 0.8s ease, opacity 0.8s ease;
-            will-change: transform, opacity;
             position: relative;
             overflow: hidden;
-            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+            will-change: transform, opacity;
+        }
+        
+        section.section-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         @keyframes fadeInUp {
@@ -1702,15 +1708,61 @@
             }
         }
         
-        .about-section, .experience-section, .industry-section, .testimonials-section, .cta-section, .get-started-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        
-        .section-visible {
+        .hero {
             opacity: 1;
             transform: translateY(0);
+        }
+        
+        /* Custom entrance animations for different sections */
+        .features-section.section-visible .feature-card {
+            animation: pop-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        
+        .features-section .feature-card {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .features-section .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .features-section .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .features-section .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .features-section .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .features-section .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .features-section .feature-card:nth-child(6) { animation-delay: 0.6s; }
+        
+        .testimonials-section.section-visible .testimonial-card {
+            animation: slide-in-right 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        
+        .testimonials-section .testimonial-card {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+        
+        .testimonials-section .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+        .testimonials-section .testimonial-card:nth-child(2) { animation-delay: 0.3s; }
+        .testimonials-section .testimonial-card:nth-child(3) { animation-delay: 0.5s; }
+        
+        @keyframes pop-in {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        @keyframes slide-in-right {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
         
         /* Floating dots animation */
@@ -2017,18 +2069,41 @@
         .video-container {
             position: relative;
             overflow: hidden;
-            transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0, 183, 255, 0.3);
+            border-radius: 8px;
+            box-shadow: 0 0 25px rgba(0, 183, 255, 0.2);
         }
         
         .video-container:hover, .video-container.active {
-            transform: scale(1.02);
-            box-shadow: 0 0 40px rgba(0, 183, 255, 0.4);
+            transform: scale(1.02) translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 183, 255, 0.4), 0 0 20px rgba(110, 0, 255, 0.3) inset;
+            border-color: rgba(0, 183, 255, 0.6);
         }
         
         .video-container.active {
-            transform: scale(1.05);
-            box-shadow: 0 0 60px rgba(0, 183, 255, 0.6);
+            transform: scale(1.05) translateY(-15px);
+            box-shadow: 0 20px 60px rgba(0, 183, 255, 0.6), 0 0 30px rgba(110, 0, 255, 0.4) inset;
             z-index: 5;
+            border-color: var(--cyan-400);
+        }
+        
+        .video-container:before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--cyan-400), var(--purple-500), var(--cyan-400));
+            z-index: -1;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .video-container:hover:before, .video-container.active:before {
+            opacity: 0.7;
         }
         
         .embedded-video {
@@ -2856,6 +2931,12 @@
                         </div>
                     </div>
                 </div>
+                </div>
+                <div class="horizontal-scroll-instructions">
+                    <i class="fas fa-arrow-left"></i>
+                    Scroll horizontally to see more testimonials
+                    <i class="fas fa-arrow-right"></i>
+                </div>
             </div>
         </div>
     </section>
@@ -3203,6 +3284,25 @@
             
             window.addEventListener('scroll', handleScroll);
             handleScroll(); // Initial check
+            
+            // Section animations with Intersection Observer
+            const sections = document.querySelectorAll('section:not(.hero)');
+            
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-visible');
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            });
+            
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
             
             // Mobile menu functionality
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
