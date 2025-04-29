@@ -168,8 +168,7 @@ export default function Testimonials() {
             spaceBetween={30}
             slidesPerView={isMobile ? 1 : 3}
             pagination={{ clickable: true }}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            loop={true}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
             effect="coverflow"
             coverflowEffect={{
               rotate: 0,
