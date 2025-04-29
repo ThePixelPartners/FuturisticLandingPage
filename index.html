@@ -761,10 +761,12 @@
         }
         
         .portal-terminal {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            margin: 1.5rem 0 0 0;
+            position: absolute;
+            width: 90%;
+            max-width: 90%;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 5;
             box-shadow: 0 0 20px rgba(0, 183, 255, 0.3);
         }
@@ -799,8 +801,8 @@
         
         /* Find Us hover feature */
         .find-us-container {
-            position: absolute;
-            top: 25%;
+            position: fixed;
+            top: 30%;
             right: 5%;
             width: 120px;
             height: 120px;
@@ -889,25 +891,7 @@
         }
         
         .coordinates-indicator {
-            position: absolute;
-            top: 60%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--cyan-400);
-            font-family: monospace;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            text-align: center;
-            white-space: nowrap;
-            visibility: hidden;
-        }
-        
-        .find-us-indicator:hover .coordinates-indicator {
-            opacity: 1;
-            transform: translate(-50%, 100%);
-            visibility: visible;
+            display: none; /* Hide this element as we'll show it only in modal */
         }
         
         .find-us-modal {
@@ -952,7 +936,18 @@
             background: linear-gradient(to right, var(--cyan-400), var(--purple-500));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: glitch 3s infinite;
+        }
+        
+        .modal-title.animated-gradient {
+            background-size: 200% 200%;
+            background-image: linear-gradient(45deg, var(--cyan-400), var(--purple-500), #ff00aa, var(--cyan-400));
+            animation: gradient-shift 3s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         .modal-subtitle {
@@ -2385,7 +2380,6 @@
             <div class="pulse-circle"></div>
             <div class="pulse-circle"></div>
             <div class="find-us-text">FIND US</div>
-            <div class="coordinates-indicator">COORDINATES CLASSIFIED</div>
         </div>
     </div>
     
@@ -2393,7 +2387,7 @@
     <div class="find-us-modal" id="findUsModal">
         <div class="find-us-modal-content">
             <button class="close-modal" id="closeModal">&times;</button>
-            <div class="modal-title">FIND US</div>
+            <div class="modal-title animated-gradient">FUND US</div>
             <div class="modal-subtitle">COORDINATES CLASSIFIED</div>
             <div class="portal-ripple"></div>
             <div class="portal-ripple"></div>
@@ -2500,7 +2494,7 @@
                     </div>
                 </div>
                 
-                <!-- Terminal output below the image -->
+                <!-- Terminal output as part of the portal image -->
                 <div class="terminal-output portal-terminal">
                     <div class="terminal-line">
                         <div class="terminal-prefix">[SYS]</div>
