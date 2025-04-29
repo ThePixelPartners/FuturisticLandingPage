@@ -761,14 +761,11 @@
         }
         
         .portal-terminal {
-            position: absolute;
-            width: 80%;
-            max-width: 400px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            margin: 0;
-            z-index: 10;
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin: 1.5rem 0 0 0;
+            z-index: 5;
             box-shadow: 0 0 20px rgba(0, 183, 255, 0.3);
         }
         
@@ -802,9 +799,9 @@
         
         /* Find Us hover feature */
         .find-us-container {
-            position: fixed;
-            top: 30%;
-            right: 10%;
+            position: absolute;
+            top: 25%;
+            right: 5%;
             width: 120px;
             height: 120px;
             cursor: pointer;
@@ -2404,6 +2401,20 @@
                             GATEWAY_ACTIVE
                         </div>
                         <div class="portal-id">ID:2037-ALPHA</div>
+                    </div>
+                </div>
+                
+                <!-- Terminal output below the image -->
+                <div class="terminal-output portal-terminal">
+                    <div class="terminal-line">
+                        <div class="terminal-prefix">[SYS]</div>
+                        <div class="terminal-text">Dimensional gateway initialized. Awaiting authorization...</div>
+                    </div>
+                    
+                    <div class="terminal-line">
+                        <div class="terminal-prefix user">[USR]</div>
+                        <div class="terminal-text">Access permitted. Welcome, traveler.</div>
+                        <span class="cursor"></span>
                     </div>
                 </div>
             </div>
