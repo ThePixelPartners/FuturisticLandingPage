@@ -1363,9 +1363,7 @@
             height: 450px;
             display: flex;
             flex-direction: column;
-            flex: 0 0 350px;
-            min-width: 350px;
-            scroll-snap-align: start;
+            width: 100%;
             backdrop-filter: blur(5px);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
             transform-origin: center bottom;
@@ -1924,9 +1922,10 @@
             }
             
             .testimonials-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: minmax(280px, 1fr);
                 max-width: 500px;
                 margin: 0 auto;
+                gap: 1.5rem;
             }
             
             .cta-buttons {
