@@ -895,10 +895,12 @@
             font-size: 0.75rem;
             font-weight: bold;
             text-align: center;
+            white-space: nowrap;
         }
         
         .find-us-indicator:hover .find-us-text {
             opacity: 1;
+            content: "FIND US";
         }
         
         .coordinates-indicator {
@@ -1321,12 +1323,16 @@
         }
         
         .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            display: flex;
             gap: 2rem;
             position: relative;
             z-index: 1;
+            overflow-x: auto;
             padding: 2rem 0 3rem;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+            scroll-behavior: smooth;
             width: 100%;
             margin-bottom: 1rem;
         }
@@ -1363,7 +1369,9 @@
             height: 450px;
             display: flex;
             flex-direction: column;
-            width: 100%;
+            flex: 0 0 350px;
+            min-width: 350px;
+            scroll-snap-align: start;
             backdrop-filter: blur(5px);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
             transform-origin: center bottom;
@@ -2405,7 +2413,7 @@
     <div class="find-us-modal" id="findUsModal">
         <div class="find-us-modal-content">
             <button class="close-modal" id="closeModal">&times;</button>
-            <div class="modal-title animated-gradient">FUND US</div>
+            <div class="modal-title animated-gradient">FIND US</div>
             <div class="modal-subtitle">COORDINATES CLASSIFIED</div>
             <div class="portal-ripple"></div>
             <div class="portal-ripple"></div>
