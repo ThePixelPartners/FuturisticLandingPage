@@ -1811,16 +1811,26 @@
         .section-transition-up {
             transform: translateY(-20px);
             opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
         }
         
         .section-transition-down {
             transform: translateY(20px);
             opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
         }
         
         .section-visible {
             transform: translateY(0);
             opacity: 1;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        
+        /* Add class for sections that leave the viewport */
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.8s ease, opacity 0.8s ease;
         }
         
         @keyframes scan {
@@ -3470,6 +3480,14 @@
             const setupSectionAnimations = () => {
                 const sections = document.querySelectorAll('section');
                 
+                // Initialize last scroll position for direction detection
+                window.lastScrollY = window.scrollY;
+                
+                // Track scroll direction
+                window.addEventListener('scroll', () => {
+                    window.lastScrollY = window.scrollY;
+                });
+                
                 // Initial state - start sections hidden
                 sections.forEach((section, index) => {
                     if (index > 0) { // Skip hero section
@@ -3477,14 +3495,29 @@
                     }
                 });
                 
-                // Intersection observer to detect when sections come into view
+                // Intersection observer to detect when sections come into or out of view
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
+                            // Section is entering the viewport
                             entry.target.classList.add('section-visible');
+                            entry.target.classList.remove('section-hidden');
+                        } else {
+                            // Section is leaving the viewport
+                            entry.target.classList.remove('section-visible');
+                            
+                            // Add appropriate transition class based on scroll direction
+                            const scrollDirection = window.scrollY > window.lastScrollY ? 'down' : 'up';
+                            window.lastScrollY = window.scrollY;
+                            
+                            if (scrollDirection === 'down') {
+                                entry.target.classList.add('section-transition-up');
+                            } else {
+                                entry.target.classList.add('section-transition-down');
+                            }
                         }
                     });
-                }, { threshold: 0.2 }); // Trigger when 20% of section is visible
+                }, { threshold: 0.1, rootMargin: '-10% 0px -10% 0px' }); // Trigger when 20% of section is visible
                 
                 // Observe all sections except the hero
                 sections.forEach((section, index) => {
@@ -3533,29 +3566,10 @@
             setupSectionAnimations();
         });
         
+        // This function is now handled by the setupSectionAnimations constant within
+        // the DOMContentLoaded event handler, so we'll just return to avoid duplication
         function setupSectionAnimations() {
-            // Add intersection observer for section animations
-            const sections = document.querySelectorAll('.about-section, .experience-section, .industry-section, .testimonials-section, .cta-section, .get-started-section');
-            
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-            
-            const sectionObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('section-visible');
-                        // Unobserve after animation is triggered
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-            
-            sections.forEach(section => {
-                sectionObserver.observe(section);
-            });
+            return; // The functionality has been moved to the more comprehensive implementation above
         }
         
         function setupSmoothScroll() {
