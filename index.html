@@ -1321,16 +1321,12 @@
         }
         
         .testimonials-grid {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
             position: relative;
             z-index: 1;
-            overflow-x: auto;
             padding: 2rem 0 3rem;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
-            scroll-behavior: smooth;
             width: 100%;
             margin-bottom: 1rem;
         }
@@ -1748,6 +1744,8 @@
         .testimonials-section .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
         .testimonials-section .testimonial-card:nth-child(2) { animation-delay: 0.3s; }
         .testimonials-section .testimonial-card:nth-child(3) { animation-delay: 0.5s; }
+        .testimonials-section .testimonial-card:nth-child(4) { animation-delay: 0.7s; }
+        .testimonials-section .testimonial-card:nth-child(5) { animation-delay: 0.9s; }
         
         @keyframes pop-in {
             0% {
@@ -2945,6 +2943,68 @@
                         <div class="author-info">
                             <div class="author-name">David Chen</div>
                             <div class="author-role">CTO, InnovateCorp</div>
+                        </div>
+                        
+                        <div class="testimonial-verified">
+                            <span class="verified-dot"></span>
+                            <span>VERIFIED</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The quantum-based security features of Parallel have provided us with unparalleled protection. As a financial institution, security is paramount, and Parallel exceeds all our expectations."
+                    </div>
+                    
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Amanda Reynolds" />
+                        </div>
+                        
+                        <div class="author-info">
+                            <div class="author-name">Amanda Reynolds</div>
+                            <div class="author-role">CISO, Global Finance Partners</div>
+                        </div>
+                        
+                        <div class="testimonial-verified">
+                            <span class="verified-dot"></span>
+                            <span>VERIFIED</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 5 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The dimensional visualization capabilities of Parallel have revolutionized our research methodology. We're now able to model complex systems with unprecedented clarity and insight."
+                    </div>
+                    
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Dr. Marcus Patel" />
+                        </div>
+                        
+                        <div class="author-info">
+                            <div class="author-name">Dr. Marcus Patel</div>
+                            <div class="author-role">Director, Quantum Research Institute</div>
                         </div>
                         
                         <div class="testimonial-verified">
